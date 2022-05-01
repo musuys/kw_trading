@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
+using System.Globalization;
 
 namespace Stock
 {
@@ -80,34 +81,99 @@ namespace Stock
             else
                 status.Items.Add("주식 일봉 정보요청 실패");
         }
+        
+        // 주식 정보요청
+        private void requestInfo()
+        {
+            axKHOpenAPI1.SetInputValue("종목코드", stockList.SelectedItem.ToString().Trim());
+            int iRet = axKHOpenAPI1.CommRqData("종목정보요청", "OPT10001", 0, "1003");
+
+            if (iRet == 0)
+                status.Items.Add("정보요청 성공");
+            else
+                status.Items.Add("정보요청 실패");
+        }
 
         // CommRqData에서 데이터 받아서 차트에 추가
         private void axKHOpenAPI1_OnReceiveTrData(object sender, AxKHOpenAPILib._DKHOpenAPIEvents_OnReceiveTrDataEvent e)
         {
-            /*
-            if(e.sRQName == "주식일봉차트조회")
+            if (e.sRQName == "종목정보요청")
             {
-                stockData.Items.Clear();
-                int count = axKHOpenAPI1.GetRepeatCnt(e.sTrCode, e.sRQName);
-                int idx = 0;
-                for(int i = 0; i < count; i++)
-                {
-                    stockData.Items.Add(idx++);
-                    stockData.Items.Add("일자 " + axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, i, "일자"));
-                    stockData.Items.Add("현재가 " + axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, i, "현재가"));
-                    stockData.Items.Add("일자 " + axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, i, "거래량"));
-                    stockData.Items.Add("일자 " + axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, i, "시가"));
-                    stockData.Items.Add("일자 " + axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, i, "고가"));
-                    stockData.Items.Add("일자 " + axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, i, "저가"));
-                    stockData.Items.Add("-------------------------------Split-------------------------------");
-                    stockData.SelectedIndex = stockData.Items.Count - 1;
-                }
+                string name = axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "종목명").Trim();
+                string cur_price = axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "현재가").Trim();
+                int c = Int32.Parse(cur_price);
+                if (c < 0)
+                    c *= -1;
+                cur_price = String.Format("{0:C}", c);
+
+                string init_price = axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "시가").Trim();
+                int init = Int32.Parse(init_price);
+                if (init < 0)
+                    init *= -1;
+                init_price = String.Format("{0:C}", init);
+
+                string rate = axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "등락율").Trim();
+                string diff = axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "전일대비").Trim();
+                int d = Int32.Parse(diff);
+                if (d < 0)
+                    d *= -1;
+                diff = string.Format("{0:C}", d);
+
+                string high = axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "상한가").Trim();
+                high = string.Format("{0:C}", Int32.Parse(high));
+
+                string low = axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "하한가").Trim();
+                low = string.Format("{0:C}", Int32.Parse(low) * (-1));
+
+                string amount = axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "거래량").Trim();
+                amount = String.Format("{0:n0}", Int32.Parse(amount));
+
+                string highest = axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "250최고").Trim();
+                highest = string.Format("{0:C}", Int32.Parse(highest));
+
+                string lowest = axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "250최저").Trim();
+                lowest = string.Format("{0:C}", Int32.Parse(lowest) * (-1));
+
+                stockData.Items.Add(name);
+                stockData.Items.Add(cur_price);
+                stockData.Items.Add(init_price);
+                stockData.Items.Add(diff);
+                stockData.Items.Add(high);
+                stockData.Items.Add(low);
+                stockData.Items.Add(amount);
+                stockData.Items.Add(highest);
+                stockData.Items.Add(lowest);
+                stockData.Items.Add(rate);
+                stockData.Items.Add("-----------");
+
+                stock_name.Text = name;
+                if (d == 0)
+                    current_price.ForeColor = Color.Gray;
+                else if (Double.Parse(rate) > 0)
+                    current_price.ForeColor = Color.Red;
+                else if(Double.Parse(rate) < 0)
+                    current_price.ForeColor = Color.Blue;
+                current_price.Text = cur_price;
+
+                if (Double.Parse(rate) < 0)
+                    difference.ForeColor = Color.Blue;
+                else if (Double.Parse(rate) > 0)
+                    difference.ForeColor = Color.Red;
+                else
+                    difference.ForeColor = Color.Gray;
+                difference.Text = diff + " | " + rate + "%";
+
+                start_prcie.Text = init_price;
+                high_price.Text = high;
+                low_price.Text = low;
+                total_amount.Text = amount;
+                year_high.Text = highest;
+                year_low.Text = lowest;
             }
-            */
-            if (e.sRQName == "주식일봉차트조회")
+
+            else if (e.sRQName == "주식일봉차트조회")
             {
                 int count = axKHOpenAPI1.GetRepeatCnt(e.sTrCode, e.sRQName);
-                int idx = 0;
                 for (int i = 0; i < count; i++)
                 {
                     priceList.Add(new PriceInfo()
@@ -124,7 +190,7 @@ namespace Stock
                     stockChart.Series["Series1"].Points[i].YValues[2] = priceList[i].initial_price;
                     stockChart.Series["Series1"].Points[i].YValues[3] = priceList[i].end_price;
                 }
-
+                /*
                 for (int i = 0; i < count; i++)
                 {
                     stockData.Items.Add(idx++);
@@ -137,6 +203,7 @@ namespace Stock
                     stockData.Items.Add("-------------------------------구분선-------------------------------");
                     stockData.SelectedIndex = stockData.Items.Count - 1;
                 }
+                */
             }
         }
 
@@ -144,8 +211,8 @@ namespace Stock
         private void select_Click(object sender, EventArgs e)
         {
             stockChart.Series["Series1"].Points.Clear();
-
             priceList = new List<PriceInfo>();
+            requestInfo();
             requestChart();
             string d = DateTime.Now.ToString("yyyyMMdd");
             axKHOpenAPI1.SetInputValue("종목코드", stockList.SelectedItem.ToString().Trim());
