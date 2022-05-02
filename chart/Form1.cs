@@ -1,20 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
-using System.Globalization;
 
 namespace Stock
 {
     public partial class Form1 : Form
     {
-        //Series chartSeries;
         List<PriceInfo> priceList;
         class PriceInfo
         {
@@ -102,22 +96,16 @@ namespace Stock
                 string name = axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "종목명").Trim();
                 string cur_price = axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "현재가").Trim();
                 int c = Int32.Parse(cur_price);
-                if (c < 0)
-                    c *= -1;
-                cur_price = String.Format("{0:C}", c);
+                cur_price = String.Format("{0:C}", Math.Abs(c));
 
                 string init_price = axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "시가").Trim();
                 int init = Int32.Parse(init_price);
-                if (init < 0)
-                    init *= -1;
-                init_price = String.Format("{0:C}", init);
+                init_price = String.Format("{0:C}", Math.Abs(init));
 
                 string rate = axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "등락율").Trim();
                 string diff = axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "전일대비").Trim();
                 int d = Int32.Parse(diff);
-                if (d < 0)
-                    d *= -1;
-                diff = string.Format("{0:C}", d);
+                diff = string.Format("{0:C}", Math.Abs(d));
 
                 string high = axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "상한가").Trim();
                 high = string.Format("{0:C}", Int32.Parse(high));
@@ -149,9 +137,9 @@ namespace Stock
                 stock_name.Text = name;
                 if (d == 0)
                     current_price.ForeColor = Color.Gray;
-                else if (Double.Parse(rate) > 0)
+                else if (c > 0)
                     current_price.ForeColor = Color.Red;
-                else if(Double.Parse(rate) < 0)
+                else if(c < 0)
                     current_price.ForeColor = Color.Blue;
                 current_price.Text = cur_price;
 
@@ -184,12 +172,18 @@ namespace Stock
                         low_price = Int32.Parse(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, i, "저가").Trim()),
                         end_price = Int32.Parse(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, i, "현재가").Trim()),
                     });
-
                     stockChart.Series["Series1"].Points.AddXY(priceList[i].date, priceList[i].high_price);
                     stockChart.Series["Series1"].Points[i].YValues[1] = priceList[i].low_price;
                     stockChart.Series["Series1"].Points[i].YValues[2] = priceList[i].initial_price;
                     stockChart.Series["Series1"].Points[i].YValues[3] = priceList[i].end_price;
                 }
+
+                // AxisViewChanged이후 zoom을 Reset해서 차트 X, Y 비율 조정
+                int max = priceList.Max(m => m.high_price);
+                int min = priceList.Min(n => n.low_price);
+                stockChart.ChartAreas[0].AxisY.Maximum = max;
+                stockChart.ChartAreas[0].AxisY.Minimum = min;
+                stockChart.ChartAreas[0].AxisX.ScaleView.ZoomReset();
                 /*
                 for (int i = 0; i < count; i++)
                 {
