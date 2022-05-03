@@ -60,6 +60,8 @@ namespace Stock
             this.stock_name_label = new System.Windows.Forms.Label();
             this.current_price_label = new System.Windows.Forms.Label();
             this.difference_label = new System.Windows.Forms.Label();
+            this.realtimeData = new System.Windows.Forms.ListBox();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.axKHOpenAPI1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.stockChart)).BeginInit();
             this.stockInfo.SuspendLayout();
@@ -71,7 +73,7 @@ namespace Stock
             this.stockData.ItemHeight = 12;
             this.stockData.Location = new System.Drawing.Point(171, 94);
             this.stockData.Name = "stockData";
-            this.stockData.Size = new System.Drawing.Size(238, 400);
+            this.stockData.Size = new System.Drawing.Size(238, 148);
             this.stockData.TabIndex = 0;
             // 
             // stockList
@@ -120,7 +122,7 @@ namespace Stock
             this.status.ItemHeight = 12;
             this.status.Location = new System.Drawing.Point(12, 96);
             this.status.Name = "status";
-            this.status.Size = new System.Drawing.Size(153, 400);
+            this.status.Size = new System.Drawing.Size(153, 148);
             this.status.TabIndex = 6;
             // 
             // axKHOpenAPI1
@@ -132,6 +134,7 @@ namespace Stock
             this.axKHOpenAPI1.Size = new System.Drawing.Size(83, 32);
             this.axKHOpenAPI1.TabIndex = 7;
             this.axKHOpenAPI1.OnReceiveTrData += new AxKHOpenAPILib._DKHOpenAPIEvents_OnReceiveTrDataEventHandler(this.axKHOpenAPI1_OnReceiveTrData);
+            this.axKHOpenAPI1.OnReceiveRealData += new AxKHOpenAPILib._DKHOpenAPIEvents_OnReceiveRealDataEventHandler(this.axKHOpenAPI1_OnReceiveRealData);
             this.axKHOpenAPI1.OnEventConnect += new AxKHOpenAPILib._DKHOpenAPIEvents_OnEventConnectEventHandler(this.axKHOpenAPI1_OnEventConnect);
             // 
             // stockChart
@@ -148,7 +151,7 @@ namespace Stock
             series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Candlestick;
             series1.CustomProperties = "PriceDownColor=Blue, PriceUpColor=Red";
             series1.Legend = "Legend1";
-            series1.Name = "Series1";
+            series1.Name = "chart_data";
             series1.YValuesPerPoint = 4;
             this.stockChart.Series.Add(series1);
             this.stockChart.Size = new System.Drawing.Size(668, 365);
@@ -189,6 +192,7 @@ namespace Stock
             this.stockInfo.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.stockInfo.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
             this.stockInfo.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
+            this.stockInfo.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.stockInfo.Size = new System.Drawing.Size(668, 100);
             this.stockInfo.TabIndex = 9;
             // 
@@ -435,11 +439,31 @@ namespace Stock
             this.difference_label.Text = "등락율";
             this.difference_label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // realtimeData
+            // 
+            this.realtimeData.FormattingEnabled = true;
+            this.realtimeData.ItemHeight = 12;
+            this.realtimeData.Location = new System.Drawing.Point(12, 271);
+            this.realtimeData.Name = "realtimeData";
+            this.realtimeData.Size = new System.Drawing.Size(397, 220);
+            this.realtimeData.TabIndex = 10;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(10, 256);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(41, 12);
+            this.label1.TabIndex = 11;
+            this.label1.Text = "실시간";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1106, 509);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.realtimeData);
             this.Controls.Add(this.stockInfo);
             this.Controls.Add(this.stockChart);
             this.Controls.Add(this.axKHOpenAPI1);
@@ -456,6 +480,7 @@ namespace Stock
             this.stockInfo.ResumeLayout(false);
             this.stockInfo.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -488,6 +513,8 @@ namespace Stock
         private System.Windows.Forms.Label stock_name_label;
         private System.Windows.Forms.Label current_price_label;
         private System.Windows.Forms.Label difference_label;
+        private System.Windows.Forms.ListBox realtimeData;
+        private System.Windows.Forms.Label label1;
     }
 }
 
