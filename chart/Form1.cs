@@ -218,9 +218,12 @@ namespace Stock
 
         private void logout_Click(object sender, EventArgs e)
         {
-            axKHOpenAPI1.CommTerminate();
-            status.Items.Add("로그아웃");
-            Close();
+            if(MessageBox.Show("프로그램을 종료합니다.", "YesOrNo", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                axKHOpenAPI1.CommTerminate();
+                status.Items.Add("로그아웃");
+                Close();
+            }
         }
 
 
