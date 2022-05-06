@@ -32,6 +32,7 @@ namespace eungsosil
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.mnuLogin = new System.Windows.Forms.ToolStripMenuItem();
+            this.로그아웃ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.cmbAcnum1 = new System.Windows.Forms.ComboBox();
             this.lblAcnum1 = new System.Windows.Forms.Label();
@@ -41,9 +42,13 @@ namespace eungsosil
             this.lblID = new System.Windows.Forms.Label();
             this.grp2 = new System.Windows.Forms.GroupBox();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.dgvList = new System.Windows.Forms.DataGridView();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.button4 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.btnSearch = new System.Windows.Forms.Button();
             this.cmbSearch = new System.Windows.Forms.ComboBox();
             this.txtSearch = new System.Windows.Forms.TextBox();
@@ -63,9 +68,8 @@ namespace eungsosil
             this.lblNum = new System.Windows.Forms.Label();
             this.lblSelect = new System.Windows.Forms.Label();
             this.lblCode = new System.Windows.Forms.Label();
-            this.cmbAcnum2 = new System.Windows.Forms.ComboBox();
-            this.lblAcnum2 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.axKHOpenAPI1 = new AxKHOpenAPILib.AxKHOpenAPI();
             this.seq = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.priority = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.jongmok_cd = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -76,18 +80,12 @@ namespace eungsosil
             this.cut_loss_price = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.buy_trd_yn = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.sell_trd_yn = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.체크 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.axKHOpenAPI1 = new AxKHOpenAPILib.AxKHOpenAPI();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.로그아웃ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.check = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.menuStrip.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.grp2.SuspendLayout();
             this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvList)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
@@ -114,6 +112,13 @@ namespace eungsosil
             this.mnuLogin.Size = new System.Drawing.Size(68, 24);
             this.mnuLogin.Text = "로그인";
             // 
+            // 로그아웃ToolStripMenuItem
+            // 
+            this.로그아웃ToolStripMenuItem.Name = "로그아웃ToolStripMenuItem";
+            this.로그아웃ToolStripMenuItem.Size = new System.Drawing.Size(83, 24);
+            this.로그아웃ToolStripMenuItem.Text = "로그아웃";
+            this.로그아웃ToolStripMenuItem.Click += new System.EventHandler(this.로그아웃ToolStripMenuItem_Click);
+            // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.cmbAcnum1);
@@ -124,9 +129,9 @@ namespace eungsosil
             this.groupBox1.Controls.Add(this.lblID);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox1.Location = new System.Drawing.Point(0, 28);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox1.Size = new System.Drawing.Size(1539, 62);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
@@ -136,7 +141,7 @@ namespace eungsosil
             // 
             this.cmbAcnum1.FormattingEnabled = true;
             this.cmbAcnum1.Location = new System.Drawing.Point(529, 24);
-            this.cmbAcnum1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cmbAcnum1.Margin = new System.Windows.Forms.Padding(2);
             this.cmbAcnum1.Name = "cmbAcnum1";
             this.cmbAcnum1.Size = new System.Drawing.Size(288, 23);
             this.cmbAcnum1.TabIndex = 3;
@@ -170,7 +175,7 @@ namespace eungsosil
             // txtID
             // 
             this.txtID.Location = new System.Drawing.Point(73, 22);
-            this.txtID.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtID.Margin = new System.Windows.Forms.Padding(2);
             this.txtID.Name = "txtID";
             this.txtID.Size = new System.Drawing.Size(129, 25);
             this.txtID.TabIndex = 1;
@@ -192,9 +197,9 @@ namespace eungsosil
             this.grp2.Controls.Add(this.panel1);
             this.grp2.Dock = System.Windows.Forms.DockStyle.Left;
             this.grp2.Location = new System.Drawing.Point(0, 90);
-            this.grp2.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.grp2.Margin = new System.Windows.Forms.Padding(8);
             this.grp2.Name = "grp2";
-            this.grp2.Padding = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.grp2.Padding = new System.Windows.Forms.Padding(8);
             this.grp2.Size = new System.Drawing.Size(694, 789);
             this.grp2.TabIndex = 3;
             this.grp2.TabStop = false;
@@ -202,20 +207,20 @@ namespace eungsosil
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.dgvList);
+            this.panel2.Controls.Add(this.dataGridView1);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(8, 129);
-            this.panel2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel2.Margin = new System.Windows.Forms.Padding(2);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(678, 652);
             this.panel2.TabIndex = 7;
             // 
-            // dgvList
+            // dataGridView1
             // 
-            this.dgvList.BackgroundColor = System.Drawing.SystemColors.Control;
-            this.dgvList.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.dgvList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.Control;
+            this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.seq,
             this.priority,
             this.jongmok_cd,
@@ -226,22 +231,22 @@ namespace eungsosil
             this.cut_loss_price,
             this.buy_trd_yn,
             this.sell_trd_yn,
-            this.체크});
-            this.dgvList.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvList.Location = new System.Drawing.Point(0, 0);
-            this.dgvList.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.dgvList.Name = "dgvList";
-            this.dgvList.RowHeadersVisible = false;
-            this.dgvList.RowHeadersWidth = 62;
-            this.dgvList.RowTemplate.Height = 30;
-            this.dgvList.Size = new System.Drawing.Size(678, 652);
-            this.dgvList.TabIndex = 4;
+            this.check});
+            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridView1.Location = new System.Drawing.Point(0, 0);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(2);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowHeadersVisible = false;
+            this.dataGridView1.RowHeadersWidth = 62;
+            this.dataGridView1.RowTemplate.Height = 30;
+            this.dataGridView1.Size = new System.Drawing.Size(678, 652);
+            this.dataGridView1.TabIndex = 4;
             // 
             // splitter1
             // 
             this.splitter1.Dock = System.Windows.Forms.DockStyle.Top;
             this.splitter1.Location = new System.Drawing.Point(8, 127);
-            this.splitter1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.splitter1.Margin = new System.Windows.Forms.Padding(2);
             this.splitter1.Name = "splitter1";
             this.splitter1.Size = new System.Drawing.Size(678, 2);
             this.splitter1.TabIndex = 6;
@@ -259,15 +264,55 @@ namespace eungsosil
             this.panel1.Controls.Add(this.lblSearch);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(8, 26);
-            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(678, 101);
             this.panel1.TabIndex = 5;
             // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(331, 58);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(75, 23);
+            this.button4.TabIndex = 9;
+            this.button4.Text = "삭제";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(234, 58);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(75, 23);
+            this.button3.TabIndex = 8;
+            this.button3.Text = "수정";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(140, 58);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 7;
+            this.button2.Text = "삽입";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(48, 58);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 6;
+            this.button1.Text = "조회";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // btnSearch
             // 
             this.btnSearch.Location = new System.Drawing.Point(425, 15);
-            this.btnSearch.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnSearch.Margin = new System.Windows.Forms.Padding(2);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(80, 25);
             this.btnSearch.TabIndex = 4;
@@ -281,7 +326,7 @@ namespace eungsosil
             "종목코드",
             "종목이름"});
             this.cmbSearch.Location = new System.Drawing.Point(95, 17);
-            this.cmbSearch.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cmbSearch.Margin = new System.Windows.Forms.Padding(2);
             this.cmbSearch.Name = "cmbSearch";
             this.cmbSearch.Size = new System.Drawing.Size(120, 23);
             this.cmbSearch.TabIndex = 5;
@@ -289,7 +334,7 @@ namespace eungsosil
             // txtSearch
             // 
             this.txtSearch.Location = new System.Drawing.Point(219, 16);
-            this.txtSearch.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtSearch.Margin = new System.Windows.Forms.Padding(2);
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.Size = new System.Drawing.Size(202, 25);
             this.txtSearch.TabIndex = 4;
@@ -320,13 +365,11 @@ namespace eungsosil
             this.groupBox2.Controls.Add(this.lblNum);
             this.groupBox2.Controls.Add(this.lblSelect);
             this.groupBox2.Controls.Add(this.lblCode);
-            this.groupBox2.Controls.Add(this.cmbAcnum2);
-            this.groupBox2.Controls.Add(this.lblAcnum2);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox2.Location = new System.Drawing.Point(694, 90);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox2.Size = new System.Drawing.Size(845, 187);
             this.groupBox2.TabIndex = 4;
             this.groupBox2.TabStop = false;
@@ -335,7 +378,7 @@ namespace eungsosil
             // btnSell
             // 
             this.btnSell.Location = new System.Drawing.Point(744, 67);
-            this.btnSell.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnSell.Margin = new System.Windows.Forms.Padding(2);
             this.btnSell.Name = "btnSell";
             this.btnSell.Size = new System.Drawing.Size(97, 92);
             this.btnSell.TabIndex = 0;
@@ -354,7 +397,7 @@ namespace eungsosil
             "장전 시간외",
             "장후 시간외"});
             this.comboBox3.Location = new System.Drawing.Point(409, 67);
-            this.comboBox3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.comboBox3.Margin = new System.Windows.Forms.Padding(2);
             this.comboBox3.Name = "comboBox3";
             this.comboBox3.Size = new System.Drawing.Size(184, 23);
             this.comboBox3.TabIndex = 11;
@@ -362,7 +405,7 @@ namespace eungsosil
             // textBox5
             // 
             this.textBox5.Location = new System.Drawing.Point(107, 135);
-            this.textBox5.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox5.Margin = new System.Windows.Forms.Padding(2);
             this.textBox5.Name = "textBox5";
             this.textBox5.Size = new System.Drawing.Size(184, 25);
             this.textBox5.TabIndex = 0;
@@ -380,7 +423,7 @@ namespace eungsosil
             // btnBuy
             // 
             this.btnBuy.Location = new System.Drawing.Point(634, 67);
-            this.btnBuy.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnBuy.Margin = new System.Windows.Forms.Padding(2);
             this.btnBuy.Name = "btnBuy";
             this.btnBuy.Size = new System.Drawing.Size(97, 92);
             this.btnBuy.TabIndex = 5;
@@ -400,7 +443,7 @@ namespace eungsosil
             // numericUpDown2
             // 
             this.numericUpDown2.Location = new System.Drawing.Point(408, 102);
-            this.numericUpDown2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.numericUpDown2.Margin = new System.Windows.Forms.Padding(2);
             this.numericUpDown2.Name = "numericUpDown2";
             this.numericUpDown2.Size = new System.Drawing.Size(183, 25);
             this.numericUpDown2.TabIndex = 9;
@@ -408,7 +451,7 @@ namespace eungsosil
             // numericUpDown1
             // 
             this.numericUpDown1.Location = new System.Drawing.Point(409, 136);
-            this.numericUpDown1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.numericUpDown1.Margin = new System.Windows.Forms.Padding(2);
             this.numericUpDown1.Name = "numericUpDown1";
             this.numericUpDown1.Size = new System.Drawing.Size(183, 25);
             this.numericUpDown1.TabIndex = 8;
@@ -416,7 +459,7 @@ namespace eungsosil
             // textBox4
             // 
             this.textBox4.Location = new System.Drawing.Point(107, 101);
-            this.textBox4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox4.Margin = new System.Windows.Forms.Padding(2);
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(184, 25);
             this.textBox4.TabIndex = 7;
@@ -424,7 +467,7 @@ namespace eungsosil
             // textBox3
             // 
             this.textBox3.Location = new System.Drawing.Point(107, 67);
-            this.textBox3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox3.Margin = new System.Windows.Forms.Padding(2);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(184, 25);
             this.textBox3.TabIndex = 6;
@@ -469,36 +512,28 @@ namespace eungsosil
             this.lblCode.TabIndex = 2;
             this.lblCode.Text = "종목코드 :";
             // 
-            // cmbAcnum2
-            // 
-            this.cmbAcnum2.FormattingEnabled = true;
-            this.cmbAcnum2.Location = new System.Drawing.Point(107, 32);
-            this.cmbAcnum2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.cmbAcnum2.Name = "cmbAcnum2";
-            this.cmbAcnum2.Size = new System.Drawing.Size(288, 23);
-            this.cmbAcnum2.TabIndex = 1;
-            // 
-            // lblAcnum2
-            // 
-            this.lblAcnum2.AutoSize = true;
-            this.lblAcnum2.Location = new System.Drawing.Point(29, 35);
-            this.lblAcnum2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblAcnum2.Name = "lblAcnum2";
-            this.lblAcnum2.Size = new System.Drawing.Size(77, 15);
-            this.lblAcnum2.TabIndex = 0;
-            this.lblAcnum2.Text = "계좌번호 :";
-            // 
             // groupBox3
             // 
             this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox3.Location = new System.Drawing.Point(694, 277);
-            this.groupBox3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox3.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox3.Size = new System.Drawing.Size(845, 602);
             this.groupBox3.TabIndex = 0;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "차트";
+            // 
+            // axKHOpenAPI1
+            // 
+            this.axKHOpenAPI1.Enabled = true;
+            this.axKHOpenAPI1.Location = new System.Drawing.Point(1952, 0);
+            this.axKHOpenAPI1.Margin = new System.Windows.Forms.Padding(2);
+            this.axKHOpenAPI1.Name = "axKHOpenAPI1";
+            this.axKHOpenAPI1.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axKHOpenAPI1.OcxState")));
+            this.axKHOpenAPI1.Size = new System.Drawing.Size(150, 75);
+            this.axKHOpenAPI1.TabIndex = 0;
+            this.axKHOpenAPI1.Visible = false;
             // 
             // seq
             // 
@@ -577,65 +612,12 @@ namespace eungsosil
             this.sell_trd_yn.Name = "sell_trd_yn";
             this.sell_trd_yn.Width = 80;
             // 
-            // 체크
+            // check
             // 
-            this.체크.HeaderText = "check";
-            this.체크.MinimumWidth = 6;
-            this.체크.Name = "체크";
-            this.체크.Width = 60;
-            // 
-            // axKHOpenAPI1
-            // 
-            this.axKHOpenAPI1.Enabled = true;
-            this.axKHOpenAPI1.Location = new System.Drawing.Point(1952, 0);
-            this.axKHOpenAPI1.Margin = new System.Windows.Forms.Padding(2);
-            this.axKHOpenAPI1.Name = "axKHOpenAPI1";
-            this.axKHOpenAPI1.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axKHOpenAPI1.OcxState")));
-            this.axKHOpenAPI1.Size = new System.Drawing.Size(150, 75);
-            this.axKHOpenAPI1.TabIndex = 0;
-            this.axKHOpenAPI1.Visible = false;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(48, 58);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 6;
-            this.button1.Text = "조회";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(140, 58);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 7;
-            this.button2.Text = "삽입";
-            this.button2.UseVisualStyleBackColor = true;
-            // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(234, 58);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 8;
-            this.button3.Text = "수정";
-            this.button3.UseVisualStyleBackColor = true;
-            // 
-            // button4
-            // 
-            this.button4.Location = new System.Drawing.Point(331, 58);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 23);
-            this.button4.TabIndex = 9;
-            this.button4.Text = "삭제";
-            this.button4.UseVisualStyleBackColor = true;
-            // 
-            // 로그아웃ToolStripMenuItem
-            // 
-            this.로그아웃ToolStripMenuItem.Name = "로그아웃ToolStripMenuItem";
-            this.로그아웃ToolStripMenuItem.Size = new System.Drawing.Size(83, 24);
-            this.로그아웃ToolStripMenuItem.Text = "로그아웃";
+            this.check.HeaderText = "체크";
+            this.check.MinimumWidth = 6;
+            this.check.Name = "check";
+            this.check.Width = 60;
             // 
             // Form1
             // 
@@ -649,7 +631,7 @@ namespace eungsosil
             this.Controls.Add(this.axKHOpenAPI1);
             this.Controls.Add(this.menuStrip);
             this.MainMenuStrip = this.menuStrip;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form1";
             this.Text = "주식";
             this.menuStrip.ResumeLayout(false);
@@ -658,7 +640,7 @@ namespace eungsosil
             this.groupBox1.PerformLayout();
             this.grp2.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvList)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -684,7 +666,7 @@ namespace eungsosil
         private System.Windows.Forms.TextBox txtName;
         private System.Windows.Forms.Label lblName;
         private System.Windows.Forms.GroupBox grp2;
-        private System.Windows.Forms.DataGridView dgvList;
+        private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Splitter splitter1;
         private System.Windows.Forms.Panel panel1;
@@ -706,10 +688,13 @@ namespace eungsosil
         private System.Windows.Forms.Label lblNum;
         private System.Windows.Forms.Label lblSelect;
         private System.Windows.Forms.Label lblCode;
-        private System.Windows.Forms.ComboBox cmbAcnum2;
-        private System.Windows.Forms.Label lblAcnum2;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Button btnSell;
+        private System.Windows.Forms.ToolStripMenuItem 로그아웃ToolStripMenuItem;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.DataGridViewTextBoxColumn seq;
         private System.Windows.Forms.DataGridViewTextBoxColumn priority;
         private System.Windows.Forms.DataGridViewTextBoxColumn jongmok_cd;
@@ -720,12 +705,7 @@ namespace eungsosil
         private System.Windows.Forms.DataGridViewTextBoxColumn cut_loss_price;
         private System.Windows.Forms.DataGridViewComboBoxColumn buy_trd_yn;
         private System.Windows.Forms.DataGridViewComboBoxColumn sell_trd_yn;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn 체크;
-        private System.Windows.Forms.ToolStripMenuItem 로그아웃ToolStripMenuItem;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn check;
     }
 }
 
