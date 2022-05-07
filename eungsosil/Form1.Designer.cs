@@ -43,6 +43,17 @@ namespace eungsosil
             this.grp2 = new System.Windows.Forms.GroupBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.seq = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.priority = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.jongmok_cd = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.jongmok_nm = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.buy_amt = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.buy_price = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.target_price = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cut_loss_price = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.buy_trd_yn = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.sell_trd_yn = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.check = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.panel1 = new System.Windows.Forms.Panel();
             this.button4 = new System.Windows.Forms.Button();
@@ -70,17 +81,8 @@ namespace eungsosil
             this.lblCode = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.axKHOpenAPI1 = new AxKHOpenAPILib.AxKHOpenAPI();
-            this.seq = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.priority = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.jongmok_cd = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.jongmok_nm = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.buy_amt = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.buy_price = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.target_price = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cut_loss_price = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.buy_trd_yn = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.sell_trd_yn = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.check = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.menuStrip.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.grp2.SuspendLayout();
@@ -91,6 +93,7 @@ namespace eungsosil
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.axKHOpenAPI1)).BeginInit();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip
@@ -111,6 +114,7 @@ namespace eungsosil
             this.mnuLogin.Name = "mnuLogin";
             this.mnuLogin.Size = new System.Drawing.Size(68, 24);
             this.mnuLogin.Text = "로그인";
+            this.mnuLogin.Click += new System.EventHandler(this.mnuLogin_Click);
             // 
             // 로그아웃ToolStripMenuItem
             // 
@@ -192,6 +196,7 @@ namespace eungsosil
             // 
             // grp2
             // 
+            this.grp2.Controls.Add(this.statusStrip1);
             this.grp2.Controls.Add(this.panel2);
             this.grp2.Controls.Add(this.splitter1);
             this.grp2.Controls.Add(this.panel1);
@@ -241,6 +246,90 @@ namespace eungsosil
             this.dataGridView1.RowTemplate.Height = 30;
             this.dataGridView1.Size = new System.Drawing.Size(678, 652);
             this.dataGridView1.TabIndex = 4;
+            // 
+            // seq
+            // 
+            this.seq.Frozen = true;
+            this.seq.HeaderText = "순번";
+            this.seq.MinimumWidth = 8;
+            this.seq.Name = "seq";
+            this.seq.Width = 60;
+            // 
+            // priority
+            // 
+            this.priority.HeaderText = "우선순위";
+            this.priority.MinimumWidth = 6;
+            this.priority.Name = "priority";
+            this.priority.Width = 80;
+            // 
+            // jongmok_cd
+            // 
+            this.jongmok_cd.HeaderText = "종목코드";
+            this.jongmok_cd.MinimumWidth = 6;
+            this.jongmok_cd.Name = "jongmok_cd";
+            this.jongmok_cd.Width = 80;
+            // 
+            // jongmok_nm
+            // 
+            this.jongmok_nm.HeaderText = "종목명";
+            this.jongmok_nm.MinimumWidth = 6;
+            this.jongmok_nm.Name = "jongmok_nm";
+            this.jongmok_nm.Width = 80;
+            // 
+            // buy_amt
+            // 
+            this.buy_amt.HeaderText = "매수금액";
+            this.buy_amt.MinimumWidth = 6;
+            this.buy_amt.Name = "buy_amt";
+            this.buy_amt.Width = 80;
+            // 
+            // buy_price
+            // 
+            this.buy_price.HeaderText = "매수가";
+            this.buy_price.MinimumWidth = 6;
+            this.buy_price.Name = "buy_price";
+            this.buy_price.Width = 70;
+            // 
+            // target_price
+            // 
+            this.target_price.HeaderText = "목표가";
+            this.target_price.MinimumWidth = 6;
+            this.target_price.Name = "target_price";
+            this.target_price.Width = 70;
+            // 
+            // cut_loss_price
+            // 
+            this.cut_loss_price.HeaderText = "손절가";
+            this.cut_loss_price.MinimumWidth = 6;
+            this.cut_loss_price.Name = "cut_loss_price";
+            this.cut_loss_price.Width = 70;
+            // 
+            // buy_trd_yn
+            // 
+            this.buy_trd_yn.HeaderText = "매수여부";
+            this.buy_trd_yn.Items.AddRange(new object[] {
+            "Y",
+            "N"});
+            this.buy_trd_yn.MinimumWidth = 6;
+            this.buy_trd_yn.Name = "buy_trd_yn";
+            this.buy_trd_yn.Width = 80;
+            // 
+            // sell_trd_yn
+            // 
+            this.sell_trd_yn.HeaderText = "매도여부";
+            this.sell_trd_yn.Items.AddRange(new object[] {
+            "Y",
+            "N"});
+            this.sell_trd_yn.MinimumWidth = 6;
+            this.sell_trd_yn.Name = "sell_trd_yn";
+            this.sell_trd_yn.Width = 80;
+            // 
+            // check
+            // 
+            this.check.HeaderText = "체크";
+            this.check.MinimumWidth = 6;
+            this.check.Name = "check";
+            this.check.Width = 60;
             // 
             // splitter1
             // 
@@ -535,89 +624,22 @@ namespace eungsosil
             this.axKHOpenAPI1.TabIndex = 0;
             this.axKHOpenAPI1.Visible = false;
             // 
-            // seq
+            // statusStrip1
             // 
-            this.seq.Frozen = true;
-            this.seq.HeaderText = "순번";
-            this.seq.MinimumWidth = 8;
-            this.seq.Name = "seq";
-            this.seq.Width = 60;
+            this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel1});
+            this.statusStrip1.Location = new System.Drawing.Point(8, 755);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(678, 26);
+            this.statusStrip1.TabIndex = 8;
+            this.statusStrip1.Text = "statusStrip1";
             // 
-            // priority
+            // toolStripStatusLabel1
             // 
-            this.priority.HeaderText = "우선순위";
-            this.priority.MinimumWidth = 6;
-            this.priority.Name = "priority";
-            this.priority.Width = 80;
-            // 
-            // jongmok_cd
-            // 
-            this.jongmok_cd.HeaderText = "종목코드";
-            this.jongmok_cd.MinimumWidth = 6;
-            this.jongmok_cd.Name = "jongmok_cd";
-            this.jongmok_cd.Width = 80;
-            // 
-            // jongmok_nm
-            // 
-            this.jongmok_nm.HeaderText = "종목명";
-            this.jongmok_nm.MinimumWidth = 6;
-            this.jongmok_nm.Name = "jongmok_nm";
-            this.jongmok_nm.Width = 80;
-            // 
-            // buy_amt
-            // 
-            this.buy_amt.HeaderText = "매수금액";
-            this.buy_amt.MinimumWidth = 6;
-            this.buy_amt.Name = "buy_amt";
-            this.buy_amt.Width = 80;
-            // 
-            // buy_price
-            // 
-            this.buy_price.HeaderText = "매수가";
-            this.buy_price.MinimumWidth = 6;
-            this.buy_price.Name = "buy_price";
-            this.buy_price.Width = 70;
-            // 
-            // target_price
-            // 
-            this.target_price.HeaderText = "목표가";
-            this.target_price.MinimumWidth = 6;
-            this.target_price.Name = "target_price";
-            this.target_price.Width = 70;
-            // 
-            // cut_loss_price
-            // 
-            this.cut_loss_price.HeaderText = "손절가";
-            this.cut_loss_price.MinimumWidth = 6;
-            this.cut_loss_price.Name = "cut_loss_price";
-            this.cut_loss_price.Width = 70;
-            // 
-            // buy_trd_yn
-            // 
-            this.buy_trd_yn.HeaderText = "매수여부";
-            this.buy_trd_yn.Items.AddRange(new object[] {
-            "Y",
-            "N"});
-            this.buy_trd_yn.MinimumWidth = 6;
-            this.buy_trd_yn.Name = "buy_trd_yn";
-            this.buy_trd_yn.Width = 80;
-            // 
-            // sell_trd_yn
-            // 
-            this.sell_trd_yn.HeaderText = "매도여부";
-            this.sell_trd_yn.Items.AddRange(new object[] {
-            "Y",
-            "N"});
-            this.sell_trd_yn.MinimumWidth = 6;
-            this.sell_trd_yn.Name = "sell_trd_yn";
-            this.sell_trd_yn.Width = 80;
-            // 
-            // check
-            // 
-            this.check.HeaderText = "체크";
-            this.check.MinimumWidth = 6;
-            this.check.Name = "check";
-            this.check.Width = 60;
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(156, 20);
+            this.toolStripStatusLabel1.Text = "주식프로그램접속중....";
             // 
             // Form1
             // 
@@ -639,6 +661,7 @@ namespace eungsosil
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.grp2.ResumeLayout(false);
+            this.grp2.PerformLayout();
             this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.panel1.ResumeLayout(false);
@@ -648,6 +671,8 @@ namespace eungsosil
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.axKHOpenAPI1)).EndInit();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -706,6 +731,8 @@ namespace eungsosil
         private System.Windows.Forms.DataGridViewComboBoxColumn buy_trd_yn;
         private System.Windows.Forms.DataGridViewComboBoxColumn sell_trd_yn;
         private System.Windows.Forms.DataGridViewCheckBoxColumn check;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
     }
 }
 
