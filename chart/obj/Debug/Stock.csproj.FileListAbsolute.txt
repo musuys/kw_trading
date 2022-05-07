@@ -1,0 +1,15 @@
+C:\Users\cyz06\Desktop\Project_Stock\Stock\bin\Debug\Stock.exe.config
+C:\Users\cyz06\Desktop\Project_Stock\Stock\bin\Debug\Stock.exe
+C:\Users\cyz06\Desktop\Project_Stock\Stock\bin\Debug\Stock.pdb
+C:\Users\cyz06\Desktop\Project_Stock\Stock\bin\Debug\Interop.KHOpenAPILib.dll
+C:\Users\cyz06\Desktop\Project_Stock\Stock\bin\Debug\AxInterop.KHOpenAPILib.dll
+C:\Users\cyz06\Desktop\Project_Stock\Stock\obj\Debug\Stock.csproj.AssemblyReference.cache
+C:\Users\cyz06\Desktop\Project_Stock\Stock\obj\Debug\Interop.KHOpenAPILib.dll
+C:\Users\cyz06\Desktop\Project_Stock\Stock\obj\Debug\AxInterop.KHOpenAPILib.dll
+C:\Users\cyz06\Desktop\Project_Stock\Stock\obj\Debug\Stock.csproj.ResolveComReference.cache
+C:\Users\cyz06\Desktop\Project_Stock\Stock\obj\Debug\Stock.Form1.resources
+C:\Users\cyz06\Desktop\Project_Stock\Stock\obj\Debug\Stock.Properties.Resources.resources
+C:\Users\cyz06\Desktop\Project_Stock\Stock\obj\Debug\Stock.csproj.GenerateResource.cache
+C:\Users\cyz06\Desktop\Project_Stock\Stock\obj\Debug\Stock.csproj.CoreCompileInputs.cache
+C:\Users\cyz06\Desktop\Project_Stock\Stock\obj\Debug\Stock.exe
+C:\Users\cyz06\Desktop\Project_Stock\Stock\obj\Debug\Stock.pdb
