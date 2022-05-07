@@ -19,6 +19,7 @@ namespace eungsosil
     {
         string g_user_id = null;
         string g_accnt_no = null;
+        string g_user_name = null;
 
         public Form1()
         {
@@ -75,6 +76,35 @@ namespace eungsosil
         //메시지로그출력 메서드 구현X
         //지연 메서드 구현X
 
+
+        [HandleProcessCorruptedStateExceptions]
+        [SecurityCritical]
+        public DateTime delay(int MS) //딜레이 매서드
+        {
+            DateTime ThisMoment = DateTime.Now;
+            TimeSpan duration = new TimeSpan(0, 0, 0, 0, MS);
+            DateTime AfterWards = ThisMoment.Add(duration);
+
+            while (AfterWards >= ThisMoment)
+            {
+                try
+                {
+                    unsafe
+                    {
+                        System.Windows.Forms.Application.DoEvents();
+                    }
+                }
+                catch (AccessViolationException ex)
+                {
+                    //write_err_log("delay() ex.Message : [" + ex.Message + "]\n", 0);
+                }
+
+                ThisMoment = DateTime.Now;
+            }
+            return DateTime.Now;
+        }
+
+
         //요청번호 부여 메서드
         int g_scr_no = 0; //open Api 요청번호
 
@@ -94,15 +124,16 @@ namespace eungsosil
             int ret = 0;
             int ret2 = 0;
 
+            String user_name = null; // 유저이름
             String l_accno = null;//증권계좌번호
             String l_accno_cnt = null;//소유한 증권계좌번호수
-            String l_accno_arr = null;//N개의 증권계좌번호를 저장할 배열
+            String[] l_accno_arr = null;//N개의 증권계좌번호를 저장할 배열
 
             ret = axKHOpenAPI1.CommConnect(); //로그인 창 호출
 
             if (ret == 0)
             {
-                /*toolStripStatusLabel1.Text = "로그인 중...";*/
+                toolStripStatusLabel1.Text = "로그인 중...";
 
                 for (; ; )
                 {
@@ -117,12 +148,16 @@ namespace eungsosil
                     }
                 }
 
-                /*toolStripStatusLabel1.Text = "로그인 완료";*/
+                toolStripStatusLabel1.Text = "로그인 완료";
 
                 g_user_id = "";
                 g_user_id = axKHOpenAPI1.GetLoginInfo("USER_ID").Trim();
 
-                //TextBox1.Text = g_user_id;
+                g_user_name = "";
+                g_user_name = axKHOpenAPI1.GetLoginInfo("USER_NAME").Trim();
+
+                txtID.Text = g_user_id;
+                txtName.Text = g_user_name;
 
                 l_accno_cnt = "";
                 l_accno_cnt = axKHOpenAPI1.GetLoginInfo("ACCOUNT_CNT").Trim();
@@ -240,15 +275,15 @@ namespace eungsosil
                 l_sell_trd_yn = "";
                 l_seq = 0;
 
-                l_jongmok_cd = reader[0].Tostring().Trim();
-                l_jongmok_nm = reader[1].Tostring().Trim();
+                l_jongmok_cd = reader[0].ToString().Trim();
+                l_jongmok_nm = reader[1].ToString().Trim();
                 l_priority = int.Parse(reader[2].ToString().Trim());
                 l_buy_amt = int.Parse(reader[3].ToString().Trim());
                 l_buy_price = int.Parse(reader[4].ToString().Trim());
                 l_target_price = int.Parse(reader[5].ToString().Trim());
                 l_cut_loss_price = int.Parse(reader[6].ToString().Trim());
-                l_buy_trd_yn = reader[7].Tostring().Trim();
-                l_sell_trd_yn = reader[8].Tostring().Trim();
+                l_buy_trd_yn = reader[7].ToString().Trim();
+                l_sell_trd_yn = reader[8].ToString().Trim();
 
                 l_arr = null;
                 l_arr = new string[]
