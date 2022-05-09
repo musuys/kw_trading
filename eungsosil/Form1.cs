@@ -875,7 +875,12 @@ namespace eungsosil
         }
         private void btnAuto_Click(object sender, EventArgs e)
         {
-            if(g_is_thread == 1)
+            if (axKHOpenAPI1.GetConnectState() != 1)
+            {
+                MessageBox.Show("로그인 후 이용해주세요!");
+                return;
+            }
+            if (g_is_thread == 1)
             {
 
                 MessageBox.Show("자동 매매가 이미 시작되었습니다.\n");
@@ -889,6 +894,11 @@ namespace eungsosil
 
         private void btnAutoEnd_Click(object sender, EventArgs e)
         {
+            if (axKHOpenAPI1.GetConnectState() != 1)
+            {
+                MessageBox.Show("로그인 후 이용해주세요!");
+                return;
+            }
             MessageBox.Show("자동 매매 종료 시도\n");
             try
             {
@@ -914,6 +924,11 @@ namespace eungsosil
 
         private void btnAccount_Click(object sender, EventArgs e)
         {
+            if(axKHOpenAPI1.GetConnectState()!=1)
+            {
+                MessageBox.Show("로그인 후 이용해주세요!");
+                return;
+            }
             accountForm af = new accountForm();
             DialogResult dResult = af.ShowDialog();
           

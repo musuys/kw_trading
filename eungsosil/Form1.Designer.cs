@@ -137,21 +137,21 @@ namespace eungsosil
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
             this.menuStrip.Padding = new System.Windows.Forms.Padding(6, 3, 0, 3);
-            this.menuStrip.Size = new System.Drawing.Size(1924, 35);
+            this.menuStrip.Size = new System.Drawing.Size(1924, 36);
             this.menuStrip.TabIndex = 1;
             this.menuStrip.Text = "menuStrip1";
             // 
             // mnuLogin
             // 
             this.mnuLogin.Name = "mnuLogin";
-            this.mnuLogin.Size = new System.Drawing.Size(82, 29);
+            this.mnuLogin.Size = new System.Drawing.Size(82, 30);
             this.mnuLogin.Text = "로그인";
             this.mnuLogin.Click += new System.EventHandler(this.mnuLogin_Click);
             // 
             // 로그아웃ToolStripMenuItem
             // 
             this.로그아웃ToolStripMenuItem.Name = "로그아웃ToolStripMenuItem";
-            this.로그아웃ToolStripMenuItem.Size = new System.Drawing.Size(100, 29);
+            this.로그아웃ToolStripMenuItem.Size = new System.Drawing.Size(100, 30);
             this.로그아웃ToolStripMenuItem.Text = "로그아웃";
             this.로그아웃ToolStripMenuItem.Click += new System.EventHandler(this.로그아웃ToolStripMenuItem_Click);
             // 
@@ -167,7 +167,7 @@ namespace eungsosil
             this.groupBox1.Controls.Add(this.txtID);
             this.groupBox1.Controls.Add(this.lblID);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox1.Location = new System.Drawing.Point(0, 35);
+            this.groupBox1.Location = new System.Drawing.Point(0, 36);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(1924, 75);
             this.groupBox1.TabIndex = 2;
@@ -264,11 +264,11 @@ namespace eungsosil
             this.grp2.Controls.Add(this.splitter1);
             this.grp2.Controls.Add(this.panel1);
             this.grp2.Dock = System.Windows.Forms.DockStyle.Left;
-            this.grp2.Location = new System.Drawing.Point(0, 110);
+            this.grp2.Location = new System.Drawing.Point(0, 111);
             this.grp2.Margin = new System.Windows.Forms.Padding(10, 9, 10, 9);
             this.grp2.Name = "grp2";
             this.grp2.Padding = new System.Windows.Forms.Padding(10, 9, 10, 9);
-            this.grp2.Size = new System.Drawing.Size(867, 944);
+            this.grp2.Size = new System.Drawing.Size(867, 943);
             this.grp2.TabIndex = 3;
             this.grp2.TabStop = false;
             this.grp2.Text = "거래종목";
@@ -278,7 +278,7 @@ namespace eungsosil
             this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1});
-            this.statusStrip1.Location = new System.Drawing.Point(10, 903);
+            this.statusStrip1.Location = new System.Drawing.Point(10, 902);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 17, 0);
             this.statusStrip1.Size = new System.Drawing.Size(847, 32);
@@ -297,7 +297,7 @@ namespace eungsosil
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(10, 155);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(847, 780);
+            this.panel2.Size = new System.Drawing.Size(847, 779);
             this.panel2.TabIndex = 7;
             // 
             // dataGridView1
@@ -323,7 +323,7 @@ namespace eungsosil
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowHeadersWidth = 62;
             this.dataGridView1.RowTemplate.Height = 30;
-            this.dataGridView1.Size = new System.Drawing.Size(847, 780);
+            this.dataGridView1.Size = new System.Drawing.Size(847, 779);
             this.dataGridView1.TabIndex = 4;
             // 
             // seq
@@ -532,7 +532,7 @@ namespace eungsosil
             this.groupBox2.Controls.Add(this.lblSelect);
             this.groupBox2.Controls.Add(this.lblCode);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox2.Location = new System.Drawing.Point(867, 110);
+            this.groupBox2.Location = new System.Drawing.Point(867, 111);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(1057, 225);
             this.groupBox2.TabIndex = 4;
@@ -669,9 +669,9 @@ namespace eungsosil
             this.groupBox3.Controls.Add(this.tableLayoutPanel1);
             this.groupBox3.Controls.Add(this.stockList);
             this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox3.Location = new System.Drawing.Point(867, 335);
+            this.groupBox3.Location = new System.Drawing.Point(867, 336);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(1057, 719);
+            this.groupBox3.Size = new System.Drawing.Size(1057, 718);
             this.groupBox3.TabIndex = 0;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "차트";

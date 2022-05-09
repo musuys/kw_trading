@@ -30,9 +30,9 @@ namespace Stock
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.stockData = new System.Windows.Forms.ListBox();
             this.stockList = new System.Windows.Forms.ComboBox();
             this.select = new System.Windows.Forms.Button();
@@ -70,27 +70,30 @@ namespace Stock
             // stockData
             // 
             this.stockData.FormattingEnabled = true;
-            this.stockData.ItemHeight = 12;
-            this.stockData.Location = new System.Drawing.Point(171, 94);
+            this.stockData.ItemHeight = 18;
+            this.stockData.Location = new System.Drawing.Point(244, 141);
+            this.stockData.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.stockData.Name = "stockData";
-            this.stockData.Size = new System.Drawing.Size(238, 148);
+            this.stockData.Size = new System.Drawing.Size(338, 220);
             this.stockData.TabIndex = 0;
             // 
             // stockList
             // 
             this.stockList.Font = new System.Drawing.Font("굴림", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.stockList.FormattingEnabled = true;
-            this.stockList.Location = new System.Drawing.Point(171, 67);
+            this.stockList.Location = new System.Drawing.Point(244, 100);
+            this.stockList.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.stockList.Name = "stockList";
-            this.stockList.Size = new System.Drawing.Size(157, 24);
+            this.stockList.Size = new System.Drawing.Size(223, 32);
             this.stockList.TabIndex = 1;
             // 
             // select
             // 
             this.select.Font = new System.Drawing.Font("굴림", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.select.Location = new System.Drawing.Point(334, 68);
+            this.select.Location = new System.Drawing.Point(477, 102);
+            this.select.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.select.Name = "select";
-            this.select.Size = new System.Drawing.Size(75, 23);
+            this.select.Size = new System.Drawing.Size(107, 34);
             this.select.TabIndex = 2;
             this.select.Text = "조회";
             this.select.UseVisualStyleBackColor = true;
@@ -98,9 +101,10 @@ namespace Stock
             // 
             // login
             // 
-            this.login.Location = new System.Drawing.Point(12, 67);
+            this.login.Location = new System.Drawing.Point(17, 100);
+            this.login.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.login.Name = "login";
-            this.login.Size = new System.Drawing.Size(72, 23);
+            this.login.Size = new System.Drawing.Size(103, 34);
             this.login.TabIndex = 3;
             this.login.Text = "로그인";
             this.login.UseVisualStyleBackColor = true;
@@ -108,9 +112,10 @@ namespace Stock
             // 
             // logout
             // 
-            this.logout.Location = new System.Drawing.Point(90, 67);
+            this.logout.Location = new System.Drawing.Point(129, 100);
+            this.logout.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.logout.Name = "logout";
-            this.logout.Size = new System.Drawing.Size(75, 23);
+            this.logout.Size = new System.Drawing.Size(107, 34);
             this.logout.TabIndex = 4;
             this.logout.Text = "로그아웃";
             this.logout.UseVisualStyleBackColor = true;
@@ -119,19 +124,21 @@ namespace Stock
             // status
             // 
             this.status.FormattingEnabled = true;
-            this.status.ItemHeight = 12;
-            this.status.Location = new System.Drawing.Point(12, 96);
+            this.status.ItemHeight = 18;
+            this.status.Location = new System.Drawing.Point(17, 144);
+            this.status.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.status.Name = "status";
-            this.status.Size = new System.Drawing.Size(153, 148);
+            this.status.Size = new System.Drawing.Size(217, 220);
             this.status.TabIndex = 6;
             // 
             // axKHOpenAPI1
             // 
             this.axKHOpenAPI1.Enabled = true;
             this.axKHOpenAPI1.Location = new System.Drawing.Point(12, 24);
+            this.axKHOpenAPI1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.axKHOpenAPI1.Name = "axKHOpenAPI1";
             this.axKHOpenAPI1.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axKHOpenAPI1.OcxState")));
-            this.axKHOpenAPI1.Size = new System.Drawing.Size(83, 32);
+            this.axKHOpenAPI1.Size = new System.Drawing.Size(124, 48);
             this.axKHOpenAPI1.TabIndex = 7;
             this.axKHOpenAPI1.OnReceiveTrData += new AxKHOpenAPILib._DKHOpenAPIEvents_OnReceiveTrDataEventHandler(this.axKHOpenAPI1_OnReceiveTrData);
             this.axKHOpenAPI1.OnReceiveRealData += new AxKHOpenAPILib._DKHOpenAPIEvents_OnReceiveRealDataEventHandler(this.axKHOpenAPI1_OnReceiveRealData);
@@ -139,22 +146,23 @@ namespace Stock
             // 
             // stockChart
             // 
-            chartArea2.AxisX.IsReversed = true;
-            chartArea2.CursorX.IsUserSelectionEnabled = true;
-            chartArea2.Name = "ChartArea1";
-            this.stockChart.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            this.stockChart.Legends.Add(legend2);
-            this.stockChart.Location = new System.Drawing.Point(426, 132);
+            chartArea1.AxisX.IsReversed = true;
+            chartArea1.CursorX.IsUserSelectionEnabled = true;
+            chartArea1.Name = "ChartArea1";
+            this.stockChart.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.stockChart.Legends.Add(legend1);
+            this.stockChart.Location = new System.Drawing.Point(609, 198);
+            this.stockChart.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.stockChart.Name = "stockChart";
-            series2.ChartArea = "ChartArea1";
-            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Candlestick;
-            series2.CustomProperties = "PriceDownColor=Blue, PriceUpColor=Red";
-            series2.Legend = "Legend1";
-            series2.Name = "chart_data";
-            series2.YValuesPerPoint = 4;
-            this.stockChart.Series.Add(series2);
-            this.stockChart.Size = new System.Drawing.Size(668, 365);
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Candlestick;
+            series1.CustomProperties = "PriceDownColor=Blue, PriceUpColor=Red";
+            series1.Legend = "Legend1";
+            series1.Name = "chart_data";
+            series1.YValuesPerPoint = 4;
+            this.stockChart.Series.Add(series1);
+            this.stockChart.Size = new System.Drawing.Size(954, 548);
             this.stockChart.TabIndex = 8;
             this.stockChart.Text = "chart1";
             this.stockChart.AxisViewChanged += new System.EventHandler<System.Windows.Forms.DataVisualization.Charting.ViewEventArgs>(this.stockChart_AxisViewChanged);
@@ -162,12 +170,12 @@ namespace Stock
             // stockInfo
             // 
             this.stockInfo.ColumnCount = 6;
-            this.stockInfo.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 85F));
-            this.stockInfo.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 195F));
-            this.stockInfo.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 67F));
-            this.stockInfo.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 126F));
-            this.stockInfo.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 86F));
-            this.stockInfo.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 109F));
+            this.stockInfo.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 121F));
+            this.stockInfo.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 279F));
+            this.stockInfo.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 96F));
+            this.stockInfo.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 180F));
+            this.stockInfo.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 123F));
+            this.stockInfo.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 156F));
             this.stockInfo.Controls.Add(this.start_price, 2, 0);
             this.stockInfo.Controls.Add(this.high_price_label, 2, 1);
             this.stockInfo.Controls.Add(this.year_high_label, 4, 1);
@@ -186,14 +194,15 @@ namespace Stock
             this.stockInfo.Controls.Add(this.stock_name_label, 0, 0);
             this.stockInfo.Controls.Add(this.current_price_label, 0, 1);
             this.stockInfo.Controls.Add(this.difference_label, 0, 2);
-            this.stockInfo.Location = new System.Drawing.Point(426, 24);
+            this.stockInfo.Location = new System.Drawing.Point(609, 36);
+            this.stockInfo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.stockInfo.Name = "stockInfo";
             this.stockInfo.RowCount = 3;
             this.stockInfo.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.stockInfo.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
             this.stockInfo.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
-            this.stockInfo.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.stockInfo.Size = new System.Drawing.Size(668, 100);
+            this.stockInfo.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            this.stockInfo.Size = new System.Drawing.Size(954, 150);
             this.stockInfo.TabIndex = 9;
             // 
             // start_price
@@ -203,9 +212,10 @@ namespace Stock
             | System.Windows.Forms.AnchorStyles.Right)));
             this.start_price.AutoSize = true;
             this.start_price.Font = new System.Drawing.Font("굴림", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.start_price.Location = new System.Drawing.Point(283, 0);
+            this.start_price.Location = new System.Drawing.Point(404, 0);
+            this.start_price.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.start_price.Name = "start_price";
-            this.start_price.Size = new System.Drawing.Size(61, 33);
+            this.start_price.Size = new System.Drawing.Size(88, 49);
             this.start_price.TabIndex = 3;
             this.start_price.Text = "시가";
             this.start_price.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -217,9 +227,10 @@ namespace Stock
             | System.Windows.Forms.AnchorStyles.Right)));
             this.high_price_label.AutoSize = true;
             this.high_price_label.Font = new System.Drawing.Font("굴림", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.high_price_label.Location = new System.Drawing.Point(283, 33);
+            this.high_price_label.Location = new System.Drawing.Point(404, 49);
+            this.high_price_label.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.high_price_label.Name = "high_price_label";
-            this.high_price_label.Size = new System.Drawing.Size(61, 33);
+            this.high_price_label.Size = new System.Drawing.Size(88, 50);
             this.high_price_label.TabIndex = 4;
             this.high_price_label.Text = "상한가";
             this.high_price_label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -231,9 +242,10 @@ namespace Stock
             | System.Windows.Forms.AnchorStyles.Right)));
             this.year_high_label.AutoSize = true;
             this.year_high_label.Font = new System.Drawing.Font("굴림", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.year_high_label.Location = new System.Drawing.Point(476, 33);
+            this.year_high_label.Location = new System.Drawing.Point(680, 49);
+            this.year_high_label.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.year_high_label.Name = "year_high_label";
-            this.year_high_label.Size = new System.Drawing.Size(80, 33);
+            this.year_high_label.Size = new System.Drawing.Size(115, 50);
             this.year_high_label.TabIndex = 7;
             this.year_high_label.Text = "52주최고";
             this.year_high_label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -245,9 +257,10 @@ namespace Stock
             | System.Windows.Forms.AnchorStyles.Right)));
             this.year_low_label.AutoSize = true;
             this.year_low_label.Font = new System.Drawing.Font("굴림", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.year_low_label.Location = new System.Drawing.Point(476, 66);
+            this.year_low_label.Location = new System.Drawing.Point(680, 99);
+            this.year_low_label.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.year_low_label.Name = "year_low_label";
-            this.year_low_label.Size = new System.Drawing.Size(80, 34);
+            this.year_low_label.Size = new System.Drawing.Size(115, 51);
             this.year_low_label.TabIndex = 8;
             this.year_low_label.Text = "52주최저";
             this.year_low_label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -259,9 +272,10 @@ namespace Stock
             | System.Windows.Forms.AnchorStyles.Right)));
             this.total_amount_label.AutoSize = true;
             this.total_amount_label.Font = new System.Drawing.Font("굴림", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.total_amount_label.Location = new System.Drawing.Point(476, 0);
+            this.total_amount_label.Location = new System.Drawing.Point(680, 0);
+            this.total_amount_label.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.total_amount_label.Name = "total_amount_label";
-            this.total_amount_label.Size = new System.Drawing.Size(80, 33);
+            this.total_amount_label.Size = new System.Drawing.Size(115, 49);
             this.total_amount_label.TabIndex = 6;
             this.total_amount_label.Text = "거래량";
             this.total_amount_label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -273,9 +287,10 @@ namespace Stock
             | System.Windows.Forms.AnchorStyles.Right)));
             this.low_price_label.AutoSize = true;
             this.low_price_label.Font = new System.Drawing.Font("굴림", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.low_price_label.Location = new System.Drawing.Point(283, 66);
+            this.low_price_label.Location = new System.Drawing.Point(404, 99);
+            this.low_price_label.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.low_price_label.Name = "low_price_label";
-            this.low_price_label.Size = new System.Drawing.Size(61, 34);
+            this.low_price_label.Size = new System.Drawing.Size(88, 51);
             this.low_price_label.TabIndex = 5;
             this.low_price_label.Text = "하한가";
             this.low_price_label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -287,9 +302,10 @@ namespace Stock
             | System.Windows.Forms.AnchorStyles.Right)));
             this.stock_name.AutoSize = true;
             this.stock_name.Font = new System.Drawing.Font("굴림", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.stock_name.Location = new System.Drawing.Point(88, 0);
+            this.stock_name.Location = new System.Drawing.Point(125, 0);
+            this.stock_name.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.stock_name.Name = "stock_name";
-            this.stock_name.Size = new System.Drawing.Size(189, 33);
+            this.stock_name.Size = new System.Drawing.Size(271, 49);
             this.stock_name.TabIndex = 15;
             this.stock_name.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -300,9 +316,10 @@ namespace Stock
             | System.Windows.Forms.AnchorStyles.Right)));
             this.current_price.AutoSize = true;
             this.current_price.Font = new System.Drawing.Font("굴림", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.current_price.Location = new System.Drawing.Point(88, 33);
+            this.current_price.Location = new System.Drawing.Point(125, 49);
+            this.current_price.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.current_price.Name = "current_price";
-            this.current_price.Size = new System.Drawing.Size(189, 33);
+            this.current_price.Size = new System.Drawing.Size(271, 50);
             this.current_price.TabIndex = 16;
             this.current_price.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -313,9 +330,10 @@ namespace Stock
             | System.Windows.Forms.AnchorStyles.Right)));
             this.difference.AutoSize = true;
             this.difference.Font = new System.Drawing.Font("굴림", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.difference.Location = new System.Drawing.Point(88, 66);
+            this.difference.Location = new System.Drawing.Point(125, 99);
+            this.difference.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.difference.Name = "difference";
-            this.difference.Size = new System.Drawing.Size(189, 34);
+            this.difference.Size = new System.Drawing.Size(271, 51);
             this.difference.TabIndex = 17;
             this.difference.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -326,9 +344,10 @@ namespace Stock
             | System.Windows.Forms.AnchorStyles.Right)));
             this.start_prcie.AutoSize = true;
             this.start_prcie.Font = new System.Drawing.Font("굴림", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.start_prcie.Location = new System.Drawing.Point(350, 0);
+            this.start_prcie.Location = new System.Drawing.Point(500, 0);
+            this.start_prcie.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.start_prcie.Name = "start_prcie";
-            this.start_prcie.Size = new System.Drawing.Size(120, 33);
+            this.start_prcie.Size = new System.Drawing.Size(172, 49);
             this.start_prcie.TabIndex = 18;
             this.start_prcie.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -339,9 +358,10 @@ namespace Stock
             | System.Windows.Forms.AnchorStyles.Right)));
             this.high_price.AutoSize = true;
             this.high_price.Font = new System.Drawing.Font("굴림", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.high_price.Location = new System.Drawing.Point(350, 33);
+            this.high_price.Location = new System.Drawing.Point(500, 49);
+            this.high_price.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.high_price.Name = "high_price";
-            this.high_price.Size = new System.Drawing.Size(120, 33);
+            this.high_price.Size = new System.Drawing.Size(172, 50);
             this.high_price.TabIndex = 18;
             this.high_price.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -352,9 +372,10 @@ namespace Stock
             | System.Windows.Forms.AnchorStyles.Right)));
             this.low_price.AutoSize = true;
             this.low_price.Font = new System.Drawing.Font("굴림", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.low_price.Location = new System.Drawing.Point(350, 66);
+            this.low_price.Location = new System.Drawing.Point(500, 99);
+            this.low_price.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.low_price.Name = "low_price";
-            this.low_price.Size = new System.Drawing.Size(120, 34);
+            this.low_price.Size = new System.Drawing.Size(172, 51);
             this.low_price.TabIndex = 18;
             this.low_price.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -365,9 +386,10 @@ namespace Stock
             | System.Windows.Forms.AnchorStyles.Right)));
             this.total_amount.AutoSize = true;
             this.total_amount.Font = new System.Drawing.Font("굴림", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.total_amount.Location = new System.Drawing.Point(562, 0);
+            this.total_amount.Location = new System.Drawing.Point(803, 0);
+            this.total_amount.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.total_amount.Name = "total_amount";
-            this.total_amount.Size = new System.Drawing.Size(103, 33);
+            this.total_amount.Size = new System.Drawing.Size(148, 49);
             this.total_amount.TabIndex = 18;
             this.total_amount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -378,9 +400,10 @@ namespace Stock
             | System.Windows.Forms.AnchorStyles.Right)));
             this.year_high.AutoSize = true;
             this.year_high.Font = new System.Drawing.Font("굴림", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.year_high.Location = new System.Drawing.Point(562, 33);
+            this.year_high.Location = new System.Drawing.Point(803, 49);
+            this.year_high.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.year_high.Name = "year_high";
-            this.year_high.Size = new System.Drawing.Size(103, 33);
+            this.year_high.Size = new System.Drawing.Size(148, 50);
             this.year_high.TabIndex = 18;
             this.year_high.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -391,9 +414,10 @@ namespace Stock
             | System.Windows.Forms.AnchorStyles.Right)));
             this.year_low.AutoSize = true;
             this.year_low.Font = new System.Drawing.Font("굴림", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.year_low.Location = new System.Drawing.Point(562, 66);
+            this.year_low.Location = new System.Drawing.Point(803, 99);
+            this.year_low.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.year_low.Name = "year_low";
-            this.year_low.Size = new System.Drawing.Size(103, 34);
+            this.year_low.Size = new System.Drawing.Size(148, 51);
             this.year_low.TabIndex = 18;
             this.year_low.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -404,9 +428,10 @@ namespace Stock
             | System.Windows.Forms.AnchorStyles.Right)));
             this.stock_name_label.AutoSize = true;
             this.stock_name_label.Font = new System.Drawing.Font("굴림", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.stock_name_label.Location = new System.Drawing.Point(3, 0);
+            this.stock_name_label.Location = new System.Drawing.Point(4, 0);
+            this.stock_name_label.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.stock_name_label.Name = "stock_name_label";
-            this.stock_name_label.Size = new System.Drawing.Size(79, 33);
+            this.stock_name_label.Size = new System.Drawing.Size(113, 49);
             this.stock_name_label.TabIndex = 19;
             this.stock_name_label.Text = "종목명";
             this.stock_name_label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -418,9 +443,10 @@ namespace Stock
             | System.Windows.Forms.AnchorStyles.Right)));
             this.current_price_label.AutoSize = true;
             this.current_price_label.Font = new System.Drawing.Font("굴림", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.current_price_label.Location = new System.Drawing.Point(3, 33);
+            this.current_price_label.Location = new System.Drawing.Point(4, 49);
+            this.current_price_label.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.current_price_label.Name = "current_price_label";
-            this.current_price_label.Size = new System.Drawing.Size(79, 33);
+            this.current_price_label.Size = new System.Drawing.Size(113, 50);
             this.current_price_label.TabIndex = 20;
             this.current_price_label.Text = "현재가";
             this.current_price_label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -432,9 +458,10 @@ namespace Stock
             | System.Windows.Forms.AnchorStyles.Right)));
             this.difference_label.AutoSize = true;
             this.difference_label.Font = new System.Drawing.Font("굴림", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.difference_label.Location = new System.Drawing.Point(3, 66);
+            this.difference_label.Location = new System.Drawing.Point(4, 99);
+            this.difference_label.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.difference_label.Name = "difference_label";
-            this.difference_label.Size = new System.Drawing.Size(79, 34);
+            this.difference_label.Size = new System.Drawing.Size(113, 51);
             this.difference_label.TabIndex = 21;
             this.difference_label.Text = "전일대비";
             this.difference_label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -442,26 +469,28 @@ namespace Stock
             // realtimeData
             // 
             this.realtimeData.FormattingEnabled = true;
-            this.realtimeData.ItemHeight = 12;
-            this.realtimeData.Location = new System.Drawing.Point(12, 271);
+            this.realtimeData.ItemHeight = 18;
+            this.realtimeData.Location = new System.Drawing.Point(17, 406);
+            this.realtimeData.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.realtimeData.Name = "realtimeData";
-            this.realtimeData.Size = new System.Drawing.Size(397, 220);
+            this.realtimeData.Size = new System.Drawing.Size(565, 328);
             this.realtimeData.TabIndex = 10;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(10, 256);
+            this.label1.Location = new System.Drawing.Point(14, 384);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(41, 12);
+            this.label1.Size = new System.Drawing.Size(62, 18);
             this.label1.TabIndex = 11;
             this.label1.Text = "실시간";
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1106, 509);
+            this.ClientSize = new System.Drawing.Size(1580, 764);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.realtimeData);
             this.Controls.Add(this.stockInfo);
@@ -473,6 +502,7 @@ namespace Stock
             this.Controls.Add(this.select);
             this.Controls.Add(this.stockList);
             this.Controls.Add(this.stockData);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "Form1";
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.axKHOpenAPI1)).EndInit();
