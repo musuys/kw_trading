@@ -179,6 +179,16 @@ namespace eungsosil
             }
         }
 
+        //로그아웃
+        private void 로그아웃ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            axKHOpenAPI1.CommTerminate();
+            toolStripStatusLabel1.Text = "로그아웃 완료";
+            txtID.Text = null;
+            txtName.Text = null;
+            cmbAcnum1.Items.Clear();
+        }
+
         //증권계좌번호
         private void cmbAcnum1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -186,10 +196,7 @@ namespace eungsosil
             //write_msg_log("사용할 증권계좌번호는 ; [" + g_accnt_no + "] 입니다. \n", 0);
         }
 
-        private void 로그아웃ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            axKHOpenAPI1.CommTerminate();
-        }
+
         
 
         //거래종목 조회
