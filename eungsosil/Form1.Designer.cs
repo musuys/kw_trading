@@ -73,11 +73,9 @@ namespace eungsosil
             this.txtSearch = new System.Windows.Forms.TextBox();
             this.lblSearch = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.btnSell = new System.Windows.Forms.Button();
             this.comboBox3 = new System.Windows.Forms.ComboBox();
             this.textBox5 = new System.Windows.Forms.TextBox();
             this.lblCurPrice = new System.Windows.Forms.Label();
-            this.btnBuy = new System.Windows.Forms.Button();
             this.lblEventname = new System.Windows.Forms.Label();
             this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
@@ -137,29 +135,27 @@ namespace eungsosil
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
             this.menuStrip.Padding = new System.Windows.Forms.Padding(6, 3, 0, 3);
-            this.menuStrip.Size = new System.Drawing.Size(1924, 36);
+            this.menuStrip.Size = new System.Drawing.Size(2118, 35);
             this.menuStrip.TabIndex = 1;
             this.menuStrip.Text = "menuStrip1";
             // 
             // mnuLogin
             // 
             this.mnuLogin.Name = "mnuLogin";
-            this.mnuLogin.Size = new System.Drawing.Size(82, 30);
+            this.mnuLogin.Size = new System.Drawing.Size(82, 29);
             this.mnuLogin.Text = "로그인";
             this.mnuLogin.Click += new System.EventHandler(this.mnuLogin_Click);
             // 
             // 로그아웃ToolStripMenuItem
             // 
             this.로그아웃ToolStripMenuItem.Name = "로그아웃ToolStripMenuItem";
-            this.로그아웃ToolStripMenuItem.Size = new System.Drawing.Size(100, 30);
+            this.로그아웃ToolStripMenuItem.Size = new System.Drawing.Size(100, 29);
             this.로그아웃ToolStripMenuItem.Text = "로그아웃";
             this.로그아웃ToolStripMenuItem.Click += new System.EventHandler(this.로그아웃ToolStripMenuItem_Click);
             // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.btnAccount);
-            this.groupBox1.Controls.Add(this.btnAutoEnd);
-            this.groupBox1.Controls.Add(this.btnAuto);
             this.groupBox1.Controls.Add(this.cmbAcnum1);
             this.groupBox1.Controls.Add(this.lblAcnum1);
             this.groupBox1.Controls.Add(this.txtName);
@@ -167,9 +163,9 @@ namespace eungsosil
             this.groupBox1.Controls.Add(this.txtID);
             this.groupBox1.Controls.Add(this.lblID);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox1.Location = new System.Drawing.Point(0, 36);
+            this.groupBox1.Location = new System.Drawing.Point(0, 35);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1924, 75);
+            this.groupBox1.Size = new System.Drawing.Size(2118, 75);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "접속정보";
@@ -186,22 +182,22 @@ namespace eungsosil
             // 
             // btnAutoEnd
             // 
-            this.btnAutoEnd.Location = new System.Drawing.Point(1552, 26);
+            this.btnAutoEnd.Location = new System.Drawing.Point(872, 54);
             this.btnAutoEnd.Name = "btnAutoEnd";
-            this.btnAutoEnd.Size = new System.Drawing.Size(209, 26);
+            this.btnAutoEnd.Size = new System.Drawing.Size(112, 112);
             this.btnAutoEnd.TabIndex = 6;
-            this.btnAutoEnd.Text = "자동매매 종료";
+            this.btnAutoEnd.Text = "자동매매\r\n종료";
             this.btnAutoEnd.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage;
             this.btnAutoEnd.UseVisualStyleBackColor = false;
             this.btnAutoEnd.Click += new System.EventHandler(this.btnAutoEnd_Click);
             // 
             // btnAuto
             // 
-            this.btnAuto.Location = new System.Drawing.Point(1328, 28);
+            this.btnAuto.Location = new System.Drawing.Point(740, 54);
             this.btnAuto.Name = "btnAuto";
-            this.btnAuto.Size = new System.Drawing.Size(209, 26);
+            this.btnAuto.Size = new System.Drawing.Size(112, 112);
             this.btnAuto.TabIndex = 5;
-            this.btnAuto.Text = "자동매매 시작";
+            this.btnAuto.Text = "자동매매\r\n시작";
             this.btnAuto.UseVisualStyleBackColor = false;
             this.btnAuto.Click += new System.EventHandler(this.btnAuto_Click);
             // 
@@ -264,11 +260,11 @@ namespace eungsosil
             this.grp2.Controls.Add(this.splitter1);
             this.grp2.Controls.Add(this.panel1);
             this.grp2.Dock = System.Windows.Forms.DockStyle.Left;
-            this.grp2.Location = new System.Drawing.Point(0, 111);
+            this.grp2.Location = new System.Drawing.Point(0, 110);
             this.grp2.Margin = new System.Windows.Forms.Padding(10, 9, 10, 9);
             this.grp2.Name = "grp2";
             this.grp2.Padding = new System.Windows.Forms.Padding(10, 9, 10, 9);
-            this.grp2.Size = new System.Drawing.Size(867, 943);
+            this.grp2.Size = new System.Drawing.Size(968, 1141);
             this.grp2.TabIndex = 3;
             this.grp2.TabStop = false;
             this.grp2.Text = "거래종목";
@@ -278,10 +274,10 @@ namespace eungsosil
             this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1});
-            this.statusStrip1.Location = new System.Drawing.Point(10, 902);
+            this.statusStrip1.Location = new System.Drawing.Point(10, 1100);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 17, 0);
-            this.statusStrip1.Size = new System.Drawing.Size(847, 32);
+            this.statusStrip1.Size = new System.Drawing.Size(948, 32);
             this.statusStrip1.TabIndex = 8;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -297,7 +293,7 @@ namespace eungsosil
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(10, 155);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(847, 779);
+            this.panel2.Size = new System.Drawing.Size(948, 977);
             this.panel2.TabIndex = 7;
             // 
             // dataGridView1
@@ -323,7 +319,7 @@ namespace eungsosil
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowHeadersWidth = 62;
             this.dataGridView1.RowTemplate.Height = 30;
-            this.dataGridView1.Size = new System.Drawing.Size(847, 779);
+            this.dataGridView1.Size = new System.Drawing.Size(948, 977);
             this.dataGridView1.TabIndex = 4;
             // 
             // seq
@@ -415,7 +411,7 @@ namespace eungsosil
             this.splitter1.Dock = System.Windows.Forms.DockStyle.Top;
             this.splitter1.Location = new System.Drawing.Point(10, 152);
             this.splitter1.Name = "splitter1";
-            this.splitter1.Size = new System.Drawing.Size(847, 3);
+            this.splitter1.Size = new System.Drawing.Size(948, 3);
             this.splitter1.TabIndex = 6;
             this.splitter1.TabStop = false;
             // 
@@ -432,7 +428,7 @@ namespace eungsosil
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(10, 30);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(847, 122);
+            this.panel1.Size = new System.Drawing.Size(948, 122);
             this.panel1.TabIndex = 5;
             // 
             // button4
@@ -517,11 +513,13 @@ namespace eungsosil
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.btnSell);
+            this.groupBox2.Controls.Add(this.searchBtn);
             this.groupBox2.Controls.Add(this.comboBox3);
+            this.groupBox2.Controls.Add(this.btnAutoEnd);
             this.groupBox2.Controls.Add(this.textBox5);
+            this.groupBox2.Controls.Add(this.stockList);
+            this.groupBox2.Controls.Add(this.btnAuto);
             this.groupBox2.Controls.Add(this.lblCurPrice);
-            this.groupBox2.Controls.Add(this.btnBuy);
             this.groupBox2.Controls.Add(this.lblEventname);
             this.groupBox2.Controls.Add(this.numericUpDown2);
             this.groupBox2.Controls.Add(this.numericUpDown1);
@@ -532,21 +530,12 @@ namespace eungsosil
             this.groupBox2.Controls.Add(this.lblSelect);
             this.groupBox2.Controls.Add(this.lblCode);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox2.Location = new System.Drawing.Point(867, 111);
+            this.groupBox2.Location = new System.Drawing.Point(968, 110);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(1057, 225);
+            this.groupBox2.Size = new System.Drawing.Size(1150, 200);
             this.groupBox2.TabIndex = 4;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "매매";
-            // 
-            // btnSell
-            // 
-            this.btnSell.Location = new System.Drawing.Point(930, 81);
-            this.btnSell.Name = "btnSell";
-            this.btnSell.Size = new System.Drawing.Size(121, 111);
-            this.btnSell.TabIndex = 0;
-            this.btnSell.Text = "매도";
-            this.btnSell.UseVisualStyleBackColor = true;
             // 
             // comboBox3
             // 
@@ -559,14 +548,14 @@ namespace eungsosil
             "최우선지정가",
             "장전 시간외",
             "장후 시간외"});
-            this.comboBox3.Location = new System.Drawing.Point(511, 81);
+            this.comboBox3.Location = new System.Drawing.Point(478, 54);
             this.comboBox3.Name = "comboBox3";
             this.comboBox3.Size = new System.Drawing.Size(230, 26);
             this.comboBox3.TabIndex = 11;
             // 
             // textBox5
             // 
-            this.textBox5.Location = new System.Drawing.Point(134, 162);
+            this.textBox5.Location = new System.Drawing.Point(125, 135);
             this.textBox5.Name = "textBox5";
             this.textBox5.Size = new System.Drawing.Size(230, 28);
             this.textBox5.TabIndex = 0;
@@ -574,25 +563,16 @@ namespace eungsosil
             // lblCurPrice
             // 
             this.lblCurPrice.AutoSize = true;
-            this.lblCurPrice.Location = new System.Drawing.Point(36, 165);
+            this.lblCurPrice.Location = new System.Drawing.Point(27, 138);
             this.lblCurPrice.Name = "lblCurPrice";
             this.lblCurPrice.Size = new System.Drawing.Size(92, 18);
             this.lblCurPrice.TabIndex = 12;
             this.lblCurPrice.Text = "시장가격 :";
             // 
-            // btnBuy
-            // 
-            this.btnBuy.Location = new System.Drawing.Point(793, 81);
-            this.btnBuy.Name = "btnBuy";
-            this.btnBuy.Size = new System.Drawing.Size(121, 111);
-            this.btnBuy.TabIndex = 5;
-            this.btnBuy.Text = "매수";
-            this.btnBuy.UseVisualStyleBackColor = true;
-            // 
             // lblEventname
             // 
             this.lblEventname.AutoSize = true;
-            this.lblEventname.Location = new System.Drawing.Point(36, 124);
+            this.lblEventname.Location = new System.Drawing.Point(27, 97);
             this.lblEventname.Name = "lblEventname";
             this.lblEventname.Size = new System.Drawing.Size(92, 18);
             this.lblEventname.TabIndex = 10;
@@ -600,28 +580,28 @@ namespace eungsosil
             // 
             // numericUpDown2
             // 
-            this.numericUpDown2.Location = new System.Drawing.Point(510, 123);
+            this.numericUpDown2.Location = new System.Drawing.Point(477, 96);
             this.numericUpDown2.Name = "numericUpDown2";
             this.numericUpDown2.Size = new System.Drawing.Size(229, 28);
             this.numericUpDown2.TabIndex = 9;
             // 
             // numericUpDown1
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(511, 164);
+            this.numericUpDown1.Location = new System.Drawing.Point(478, 137);
             this.numericUpDown1.Name = "numericUpDown1";
             this.numericUpDown1.Size = new System.Drawing.Size(229, 28);
             this.numericUpDown1.TabIndex = 8;
             // 
             // textBox4
             // 
-            this.textBox4.Location = new System.Drawing.Point(134, 122);
+            this.textBox4.Location = new System.Drawing.Point(125, 95);
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(230, 28);
             this.textBox4.TabIndex = 7;
             // 
             // textBox3
             // 
-            this.textBox3.Location = new System.Drawing.Point(134, 81);
+            this.textBox3.Location = new System.Drawing.Point(125, 54);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(230, 28);
             this.textBox3.TabIndex = 6;
@@ -629,7 +609,7 @@ namespace eungsosil
             // lblBuyPrice
             // 
             this.lblBuyPrice.AutoSize = true;
-            this.lblBuyPrice.Location = new System.Drawing.Point(413, 166);
+            this.lblBuyPrice.Location = new System.Drawing.Point(380, 139);
             this.lblBuyPrice.Name = "lblBuyPrice";
             this.lblBuyPrice.Size = new System.Drawing.Size(92, 18);
             this.lblBuyPrice.TabIndex = 5;
@@ -638,7 +618,7 @@ namespace eungsosil
             // lblNum
             // 
             this.lblNum.AutoSize = true;
-            this.lblNum.Location = new System.Drawing.Point(413, 126);
+            this.lblNum.Location = new System.Drawing.Point(380, 99);
             this.lblNum.Name = "lblNum";
             this.lblNum.Size = new System.Drawing.Size(92, 18);
             this.lblNum.TabIndex = 4;
@@ -647,7 +627,7 @@ namespace eungsosil
             // lblSelect
             // 
             this.lblSelect.AutoSize = true;
-            this.lblSelect.Location = new System.Drawing.Point(413, 84);
+            this.lblSelect.Location = new System.Drawing.Point(380, 57);
             this.lblSelect.Name = "lblSelect";
             this.lblSelect.Size = new System.Drawing.Size(80, 18);
             this.lblSelect.TabIndex = 3;
@@ -656,7 +636,7 @@ namespace eungsosil
             // lblCode
             // 
             this.lblCode.AutoSize = true;
-            this.lblCode.Location = new System.Drawing.Point(36, 84);
+            this.lblCode.Location = new System.Drawing.Point(27, 57);
             this.lblCode.Name = "lblCode";
             this.lblCode.Size = new System.Drawing.Size(92, 18);
             this.lblCode.TabIndex = 2;
@@ -664,26 +644,24 @@ namespace eungsosil
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.searchBtn);
             this.groupBox3.Controls.Add(this.stockChart);
             this.groupBox3.Controls.Add(this.tableLayoutPanel1);
-            this.groupBox3.Controls.Add(this.stockList);
             this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox3.Location = new System.Drawing.Point(867, 336);
+            this.groupBox3.Location = new System.Drawing.Point(968, 310);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(1057, 718);
+            this.groupBox3.Size = new System.Drawing.Size(1150, 941);
             this.groupBox3.TabIndex = 0;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "차트";
             // 
             // searchBtn
             // 
-            this.searchBtn.Location = new System.Drawing.Point(934, 222);
+            this.searchBtn.Location = new System.Drawing.Point(1006, 92);
             this.searchBtn.Margin = new System.Windows.Forms.Padding(4);
             this.searchBtn.Name = "searchBtn";
-            this.searchBtn.Size = new System.Drawing.Size(107, 34);
+            this.searchBtn.Size = new System.Drawing.Size(112, 74);
             this.searchBtn.TabIndex = 20;
-            this.searchBtn.Text = "조회";
+            this.searchBtn.Text = "차트조회";
             this.searchBtn.UseVisualStyleBackColor = true;
             this.searchBtn.Click += new System.EventHandler(this.searchBtn_Click);
             // 
@@ -994,10 +972,10 @@ namespace eungsosil
             // stockList
             // 
             this.stockList.FormattingEnabled = true;
-            this.stockList.Location = new System.Drawing.Point(930, 183);
+            this.stockList.Location = new System.Drawing.Point(1006, 54);
             this.stockList.Margin = new System.Windows.Forms.Padding(4);
             this.stockList.Name = "stockList";
-            this.stockList.Size = new System.Drawing.Size(114, 26);
+            this.stockList.Size = new System.Drawing.Size(112, 26);
             this.stockList.TabIndex = 18;
             // 
             // axKHOpenAPI1
@@ -1016,7 +994,7 @@ namespace eungsosil
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1924, 1054);
+            this.ClientSize = new System.Drawing.Size(2118, 1251);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.grp2);
@@ -1076,7 +1054,6 @@ namespace eungsosil
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.TextBox textBox5;
         private System.Windows.Forms.Label lblCurPrice;
-        private System.Windows.Forms.Button btnBuy;
         private System.Windows.Forms.ComboBox comboBox3;
         private System.Windows.Forms.Label lblEventname;
         private System.Windows.Forms.NumericUpDown numericUpDown2;
@@ -1088,7 +1065,6 @@ namespace eungsosil
         private System.Windows.Forms.Label lblSelect;
         private System.Windows.Forms.Label lblCode;
         private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.Button btnSell;
         private System.Windows.Forms.ToolStripMenuItem 로그아웃ToolStripMenuItem;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button3;
