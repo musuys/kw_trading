@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using Oracle.ManagedDataAccess.Client;
 using System.Runtime.ExceptionServices;
 using System.Security;
-
+using System.Threading;
 
 namespace eungsosil
 
@@ -21,6 +21,10 @@ namespace eungsosil
         string g_accnt_no = null;
         string g_user_name = null;
         List<PriceInfo> priceList;
+
+        int g_is_thread = 0;
+        Thread thread1 = null;
+
         public Form1()
         {
             InitializeComponent();
@@ -831,5 +835,138 @@ namespace eungsosil
         {
 
         }
+
+
+
+
+        //자동매매
+
+
+        public void m_thread1()
+        {
+            string l_cur_tm = null;
+
+            if(g_is_thread == 0)
+            {
+                g_is_thread = 1;
+                MessageBox.Show("자동매매가 시작되었습니다. \n");
+            }
+            for(; ; )
+            {
+                l_cur_tm = get_cur_tm();
+                if(l_cur_tm.CompareTo("083001")>=0)
+                {
+                    //계좌 조회, 계좌정보 조호ㅚ, 보유종목 매도수문 수행
+                }
+                if(l_cur_tm.CompareTo("090001")>=0)
+                {
+                    for(; ; )
+                    {
+                        l_cur_tm = get_cur_tm();//현재시각 조회
+                        if(l_cur_tm.CompareTo("153001")>=0)
+                        {
+                            break;
+                        }
+                        delay(200);
+                    }
+                }
+                delay(200);
+            }
+        }
+        private void btnAuto_Click(object sender, EventArgs e)
+        {
+            if (axKHOpenAPI1.GetConnectState() != 1)
+            {
+                MessageBox.Show("로그인 후 이용해주세요!");
+                return;
+            }
+            if (g_is_thread == 1)
+            {
+
+                MessageBox.Show("자동 매매가 이미 시작되었습니다.\n");
+                return;
+            }
+            g_is_thread = 1;
+            thread1 = new Thread(new ThreadStart(m_thread1));
+            thread1.Start();
+
+        }
+
+        private void btnAutoEnd_Click(object sender, EventArgs e)
+        {
+            if (axKHOpenAPI1.GetConnectState() != 1)
+            {
+                MessageBox.Show("로그인 후 이용해주세요!");
+                return;
+            }
+            MessageBox.Show("자동 매매 종료 시도\n");
+            try
+            {
+                thread1.Abort();
+            }catch (Exception ex)
+            {
+                MessageBox.Show("자동매매 중지 (" + ex.Message + ")\n");
+            }
+            this.Invoke(new MethodInvoker(() => 
+                {
+                if(thread1 != null)
+                {
+                    thread1.Interrupt();
+                    thread1 = null;
+                }
+            }));
+            g_is_thread = 0;
+
+            MessageBox.Show("자동매매 중지 완료\n");
+
+
+        }
+
+        private void btnAccount_Click(object sender, EventArgs e)
+        {
+            if(axKHOpenAPI1.GetConnectState()!=1)
+            {
+                MessageBox.Show("로그인 후 이용해주세요!");
+                return;
+            }
+            accountForm af = new accountForm();
+            DialogResult dResult = af.ShowDialog();
+          
+
+        }
+
+        private void cmbAcnum1_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+
+        }
+        /*
+
+public void write_msg_log(String text, int is_clear)
+{
+DateTime l_cur_time;
+String l_cur_dt;
+String l_cur_tm;
+String l_cur_dtm;
+
+l_cur_dt = "";
+l_cur_tm = "";
+
+l_cur_time = DateTime.Now;
+l_cur_dt = l_cur_time.ToString("yyyy-") + l_cur_time.ToString("MM-") + l_cur_time.ToString("dd");
+
+l_cur_tm = l_cur_time.ToString("HH:mm:ss");
+l_cur_dtm = "[" + l_cur_dt + " " + l_cur_tm + "]";
+
+if(is_clear ==  1)
+{
+MessageBox.Show("test");
+}
+else
+{
+if(this.textbox)
+}
+
+
+}*/
     }
 }
