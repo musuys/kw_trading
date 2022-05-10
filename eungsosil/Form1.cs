@@ -183,6 +183,10 @@ namespace eungsosil
                 cmbAcnum1.SelectedIndex = 0;
                 g_accnt_no = cmbAcnum1.SelectedItem.ToString().Trim();
 
+                //로그인 성공시 계좌 비밀번호 입력창 출력
+                axKHOpenAPI1.KOA_Functions("ShowAccountWindow", "");
+
+
 
             }
 
