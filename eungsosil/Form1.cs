@@ -22,6 +22,11 @@ namespace eungsosil
         string g_user_name = null;
         List<PriceInfo> priceList;
 
+        int g_flag_1 = 0;
+
+        string g_rqname = null;
+        int g_ord_amt_possible = 0;
+
         int g_is_thread = 0;
         Thread thread1 = null;
 
@@ -177,7 +182,11 @@ namespace eungsosil
                 cmbAcnum1.Items.AddRange(l_accno_arr);
                 cmbAcnum1.SelectedIndex = 0;
                 g_accnt_no = cmbAcnum1.SelectedItem.ToString().Trim();
+
+
             }
+
+
         }
 
         //로그아웃
@@ -705,13 +714,14 @@ namespace eungsosil
             }
         }
 
+
         private void axKHOpenAPI1_OnReceiveTrData(object sender, AxKHOpenAPILib._DKHOpenAPIEvents_OnReceiveTrDataEvent e)
         {
             // 한번 data 받아서 data 출력
             if (e.sRQName == "종목정보요청")
             {
-                
-                string code= axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "종목코드").Trim();
+
+                string code = axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "종목코드").Trim();
 
                 string name = axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "종목명").Trim();
                 string cur_price = axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "현재가").Trim();
@@ -796,9 +806,22 @@ namespace eungsosil
                 stockChart.ChartAreas[0].AxisY.Minimum = min;
                 stockChart.ChartAreas[0].AxisX.ScaleView.ZoomReset();
             }
+            else if (e.sRQName == "계좌잔고평가내역")//예수금 출력을 위한 tr데이터 
+            {
+                int acAll = int.Parse(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "총매입금액"));
+                int ac = int.Parse(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "추정예탁자산"));
+                int all = int.Parse(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "총평가금액"));
+                int allBen = int.Parse(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "총평가손익"));
+
+                tbAccount.Text = acAll.ToString();
+
+
+
+            }
         }
 
-        // 실시간 차트 업데이트를 위해 같은 같은 캔들 차트 사용 판단
+
+            // 실시간 차트 업데이트를 위해 같은 같은 캔들 차트 사용 판단
         bool is_Same_CandleData(string date)
         {
             string now_time = DateTime.Now.ToString("yyyyMMdd");
@@ -935,16 +958,113 @@ namespace eungsosil
 
         }
 
+        public void set_tb_accnt()
+        {
+            int l_for_cnt = 0;
+            int l_for_flag = 0;
+
+            MessageBox.Show("테이블 세팅 시작!");//need to eliminate
+
+            //write_msg_log("TB_ACCNT 테이블 세팅 시작\n", 0);
+
+            g_ord_amt_possible = 0;
+            l_for_flag = 0;
+            for(; ; )
+            {
+                axKHOpenAPI1.SetInputValue("계좌번호", g_accnt_no);
+                axKHOpenAPI1.SetInputValue("비밀번호", "");
+
+                g_rqname = "";
+                g_rqname = "증거금세부내역조회요청";//요청명 정의
+                g_flag_1 = 0;//요청중
+
+                String l_scr_no = null; //화면번호
+                l_scr_no = "";
+                l_scr_no = get_scr_no();
+                axKHOpenAPI1.CommRqData("증거금세부내역조회요청", "opw00013", 0, l_scr_no);//open api로 데이터 요청
+
+                l_for_cnt = 0;
+                for (; ; )//요청 후 대기 시작
+                {
+                    if(g_flag_1==1)
+                    {
+                        delay(1000);
+                        axKHOpenAPI1.DisconnectRealData(l_scr_no);
+                        l_for_flag = 1;
+                        break;
+                    }
+                    else //요청 응답 아직
+                    {
+                        MessageBox.Show("대기중..");//need to eliminate
+                        //write_msg_log("'증거금 세부내역조회 요청' 완료 대기 중 시작\n", 0);
+                        delay(1000);
+                        l_for_cnt++;
+                        if (l_for_cnt == 1)
+                        {
+                            l_for_flag = 9;
+                            break;
+                        }
+                        else
+                            continue;
+                    }
+                    axKHOpenAPI1.DisconnectRealData(l_scr_no);//화면번호 접속해제
+                    if (l_for_flag == 1)//요청에 대한 응답 받았으므로 무한루프 빠져나옴
+                    {
+                        break;
+                    }else if(l_for_flag==0)
+                    {
+                        delay(1000);
+                        break;
+                    }
+                    delay(1000);
+                }
+                MessageBox.Show("주문가능금액: " + g_ord_amt_possible.ToString());//need to eliminate
+                                                                            //write_msg_log("주문가능금액: "+g_ord_amt_possible.ToString() "\n", 0);
+
+
+
+
+            }
+
+        }
+
         private void btnAccount_Click(object sender, EventArgs e)
         {
-            if(axKHOpenAPI1.GetConnectState()!=1)
+            String l_accno = null;//증권계좌번호
+            String l_accno_cnt = null;//소유한 증권계좌번호수
+            String[] l_accno_arr = null;//N개의 증권계좌번호를 저장할 배열
+
+            if (axKHOpenAPI1.GetConnectState()!=1)
             {
                 MessageBox.Show("로그인 후 이용해주세요!");
                 return;
             }
-            accountForm af = new accountForm();
-            DialogResult dResult = af.ShowDialog();
-          
+           // accountForm af = new accountForm();
+            //DialogResult dResult = af.ShowDialog();
+            l_accno_cnt = "";
+
+            l_accno_cnt = axKHOpenAPI1.GetLoginInfo("ACCOUNT_CNT").Trim();
+
+            l_accno_arr = new String[int.Parse(l_accno_cnt)];
+            l_accno = "";
+            l_accno = axKHOpenAPI1.GetLoginInfo("ACCNO").Trim();
+
+            l_accno_arr = l_accno.Split(';');
+
+            cmbAcnum1.Items.Clear();
+            cmbAcnum1.Items.AddRange(l_accno_arr);
+            cmbAcnum1.SelectedIndex = 0;
+            g_accnt_no = cmbAcnum1.SelectedItem.ToString().Trim();
+            string acNum = cmbAcnum1.Text;
+            axKHOpenAPI1.SetInputValue("계좌번호", acNum);
+            axKHOpenAPI1.SetInputValue("비밀번호", "");
+            axKHOpenAPI1.SetInputValue("비밀번호입력매체구분", "00");
+            axKHOpenAPI1.SetInputValue("조회구분", "2");
+
+            int iRet = axKHOpenAPI1.CommRqData("계좌잔고평가내역", "opw00018", 0, "5000");
+            if (iRet != 0)
+                MessageBox.Show("계좌잔고평가내역 요청 실패");
+
 
         }
 
@@ -1002,34 +1122,33 @@ namespace eungsosil
         {
 
         }
-        /*
-
-public void write_msg_log(String text, int is_clear)
-{
-DateTime l_cur_time;
-String l_cur_dt;
-String l_cur_tm;
-String l_cur_dtm;
-
-l_cur_dt = "";
-l_cur_tm = "";
-
-l_cur_time = DateTime.Now;
-l_cur_dt = l_cur_time.ToString("yyyy-") + l_cur_time.ToString("MM-") + l_cur_time.ToString("dd");
-
-l_cur_tm = l_cur_time.ToString("HH:mm:ss");
-l_cur_dtm = "[" + l_cur_dt + " " + l_cur_tm + "]";
-
-if(is_clear ==  1)
-{
-MessageBox.Show("test");
-}
-else
-{
-if(this.textbox)
-}
 
 
-}*/
+
+        //write_msg_log 출력을 위한 콘솔창 하나 만들기
+        public void write_msg_log(String text, int is_clear)
+        {
+            DateTime l_cur_time;
+            String l_cur_dt;
+            String l_cur_tm;
+            String l_cur_dtm;
+
+            l_cur_dt = "";
+            l_cur_tm = "";
+
+            l_cur_time = DateTime.Now;
+            l_cur_dt = l_cur_time.ToString("yyyy-") + l_cur_time.ToString("MM-") + l_cur_time.ToString("dd");
+
+            l_cur_tm = l_cur_time.ToString("HH:mm:ss");
+            l_cur_dtm = "[" + l_cur_dt + " " + l_cur_tm + "]";
+
+            if (is_clear == 1)
+            {
+                MessageBox.Show("test");
+            }
+            else
+            {
+            }
+        }
     }
 }

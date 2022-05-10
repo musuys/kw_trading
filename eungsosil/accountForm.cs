@@ -86,7 +86,9 @@ namespace eungsosil
             axKHOpenAPI1.SetInputValue("비밀번호입력매체구분", "00");
             axKHOpenAPI1.SetInputValue("조회구분", "2");
 
-            axKHOpenAPI1.CommRqData("계좌잔고평가내역", "opw00018", 0, "5000");
+            int iRet = axKHOpenAPI1.CommRqData("계좌잔고평가내역", "opw00018", 0, "5000");
+            if (iRet != 0)
+                MessageBox.Show("계좌잔고평가내역 요청 실패");
 
 
         }
