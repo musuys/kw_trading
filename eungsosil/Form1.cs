@@ -28,6 +28,7 @@ namespace eungsosil
         public Form1()
         {
             InitializeComponent();
+            
         }
 
         public string get_cur_tm()
@@ -128,7 +129,7 @@ namespace eungsosil
             int ret = 0;
             int ret2 = 0;
 
-            String user_name = null; // 유저이름
+            
             String l_accno = null;//증권계좌번호
             String l_accno_cnt = null;//소유한 증권계좌번호수
             String[] l_accno_arr = null;//N개의 증권계좌번호를 저장할 배열
@@ -186,7 +187,8 @@ namespace eungsosil
             toolStripStatusLabel1.Text = "로그아웃 완료";
             txtID.Text = null;
             txtName.Text = null;
-            cmbAcnum1.Items.Clear();
+            stockList.Items.Clear();
+            txtSearch.Text = null;
         }
 
         //증권계좌번호
@@ -708,6 +710,9 @@ namespace eungsosil
             // 한번 data 받아서 data 출력
             if (e.sRQName == "종목정보요청")
             {
+                
+                string code= axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "종목코드").Trim();
+
                 string name = axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "종목명").Trim();
                 string cur_price = axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "현재가").Trim();
                 int c = Int32.Parse(cur_price);
@@ -737,7 +742,8 @@ namespace eungsosil
                 string lowest = axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "250최저").Trim();
                 lowest = string.Format("{0:C}", Int32.Parse(lowest) * (-1));
 
-                stock_name.Text = name;
+                // 종목코드 추가 출력
+                stock_name.Text = name + ' ' + '(' + code + ')';
                 if (d == 0)
                     current_price.ForeColor = Color.Gray;
                 else if (c > 0)
@@ -941,6 +947,56 @@ namespace eungsosil
           
 
         }
+
+
+
+
+        //종목명으로 종목정보,차트검색하기
+        public void stockSearch(object sender, EventArgs e)
+        {
+
+            stockChart.Series["chart_data"].Points.Clear();
+            priceList = new List<PriceInfo>();
+
+
+            string 종목코드리스트 = axKHOpenAPI1.GetCodeListByMarket("0");
+            string[] 종목코드 = 종목코드리스트.Split(';');
+
+            string 종목명 = txtSearch.Text;
+            for (int i = 0; i < 종목코드.Length; i++)
+            {
+                if (txtSearch.Text.Length > 0 && txtSearch.Text == axKHOpenAPI1.GetMasterCodeName(종목코드[i]))
+                {
+
+                    //종목정보요청
+                    axKHOpenAPI1.SetInputValue("종목코드", 종목코드[i]);
+                    int iRet = axKHOpenAPI1.CommRqData("종목정보요청", "OPT10001", 0, "1002");
+
+                    if (iRet != 0)
+                        MessageBox.Show("정보요청 실패");
+
+
+                    //차트 요청
+                    string date = DateTime.Now.ToString("yyyyMMdd");
+                    axKHOpenAPI1.SetInputValue("종목코드", 종목코드[i]);
+                    axKHOpenAPI1.SetInputValue("기준일자", date);
+                    axKHOpenAPI1.SetInputValue("수정주가구분", "1");
+
+                    int nRet = axKHOpenAPI1.CommRqData("주식일봉차트조회", "OPT10081", 0, "1002");
+
+                    if (nRet != 0)
+                        MessageBox.Show("차트요청 실패");
+
+
+                    /*axKHOpenAPI1.SetInputValue("종목코드", 종목코드[i]);
+                    axKHOpenAPI1.CommRqData("종목정보요청", "opt10001", 0, "5000");*/
+                }
+
+               
+            }
+
+        }
+
 
         private void cmbAcnum1_SelectedIndexChanged_1(object sender, EventArgs e)
         {
