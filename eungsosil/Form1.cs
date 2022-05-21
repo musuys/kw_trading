@@ -922,7 +922,7 @@ namespace eungsosil
                 l_cur_tm = get_cur_tm();
                 if(l_cur_tm.CompareTo("083001")>=0)
                 {
-                    //계좌 조회, 계좌정보 조호ㅚ, 보유종목 매도수문 수행
+                    //계좌 조회, 계좌정보 조회, 보유종목 매도수문 수행
                 }
                 if(l_cur_tm.CompareTo("090001")>=0)
                 {
