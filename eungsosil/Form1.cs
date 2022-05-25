@@ -56,14 +56,15 @@ namespace eungsosil
 
         private OracleConnection connect_db() //오라클 연결 변수 리턴
         {
-            String conninfo = "User Id=ats;" +
-                "Passwor1234;" +
-                "Data Source=(DESCRIPTION=" +
-                "(ADDRESS=(PROTOCOL=TCP)(HOST=localhost)(PORT=1521))" +
-                "(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=xe)) );"; //접속정보 변수저장
-
+            //   String conninfo = "User Id=ats;" +
+            //     "Passwor1234;" +
+            //   "Data Source=(DESCRIPTION=" +
+            // "(ADDRESS=(PROTOCOL=TCP)(HOST=localhost)(PORT=1521))" +
+            //"(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=xe)) );"; //접속정보 변수저장
+            String conninfo = "User Id=ats; " +
+                "Password=1234; " +
+                "Data Source=(DESCRIPTION =   (ADDRESS = (PROTOCOL = TCP)(HOST = localhost)(PORT = 1521))   (CONNECT_DATA =     (SERVER = DEDICATED)     (SERVICE_NAME = xe)   ) );";
             OracleConnection conn = new OracleConnection(conninfo);
-
             try
             {
                 conn.Open();
@@ -363,9 +364,9 @@ namespace eungsosil
                 }
                 if(Convert.ToBoolean(Row.Cells[check.Name].Value) == true)
                 {
-                    l_jongmok_cd = Row.Cells[1].Value.ToString();
-                    l_jongmok_nm = Row.Cells[2].Value.ToString();
-                    l_priority = int.Parse(Row.Cells[3].Value.ToString());
+                    l_jongmok_cd = Row.Cells[2].Value.ToString();
+                    l_jongmok_nm = Row.Cells[3].Value.ToString();
+                    l_priority = int.Parse(Row.Cells[1].Value.ToString());
                     l_buy_amt = int.Parse(Row.Cells[4].Value.ToString());
                     l_buy_price = int.Parse(Row.Cells[5].Value.ToString());
 
