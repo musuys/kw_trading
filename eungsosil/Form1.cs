@@ -21,14 +21,14 @@ namespace eungsosil
         string g_accnt_no = null;
         string g_user_name = null;
         List<PriceInfo> priceList;
-
+        Dictionary<string, string> dict = new Dictionary<string, string>();
         int g_is_thread = 0;
         Thread thread1 = null;
 
         public Form1()
         {
             InitializeComponent();
-            
+
         }
 
         public string get_cur_tm()
@@ -40,7 +40,7 @@ namespace eungsosil
             l_cur_tm = l_cur_time.ToString("HHmmss"); // 시분초를 1_cur_tm에 저장
 
             return l_cur_tm; //현재시각 리턴
-            
+
         }
 
         public string get_jongmok_nm(string i_jongmok_cd) //종목코드를 입력값으로 받음
@@ -130,7 +130,7 @@ namespace eungsosil
             int ret = 0;
             int ret2 = 0;
 
-            
+
             String l_accno = null;//증권계좌번호
             String l_accno_cnt = null;//소유한 증권계좌번호수
             String[] l_accno_arr = null;//N개의 증권계좌번호를 저장할 배열
@@ -150,7 +150,7 @@ namespace eungsosil
                     }
                     else
                     {
-                        delay(1000); 
+                        delay(1000);
                     }
                 }
 
@@ -217,11 +217,12 @@ namespace eungsosil
         }
 
 
-        
+
 
         //거래종목 조회
         private void button1_Click(object sender, EventArgs e)
         {
+
             OracleCommand cmd;
             OracleConnection conn;
             OracleDataReader reader = null;
@@ -284,14 +285,14 @@ namespace eungsosil
 
             l_jongmok_cd = "";
             l_jongmok_nm = "";
-            l_priority=0;
-            l_buy_amt=0;
+            l_priority = 0;
+            l_buy_amt = 0;
             l_buy_price = 0;
-            l_target_price=0;
-            l_cut_loss_price=0;
-            l_buy_trd_yn="";
-            l_sell_trd_yn="";
-            
+            l_target_price = 0;
+            l_cut_loss_price = 0;
+            l_buy_trd_yn = "";
+            l_sell_trd_yn = "";
+
             while (reader.Read())
             {
                 l_seq++;
@@ -304,7 +305,7 @@ namespace eungsosil
                 l_cut_loss_price = 0;
                 l_buy_trd_yn = "";
                 l_sell_trd_yn = "";
-                l_seq = 0;
+                //l_seq = 0;
 
                 l_jongmok_cd = reader[0].ToString().Trim();
                 l_jongmok_nm = reader[1].ToString().Trim();
@@ -333,7 +334,7 @@ namespace eungsosil
                 this.Invoke(new MethodInvoker(
                     delegate ()
                     {
-                        dataGridView1.Rows.Add(l_arr) ; //데이터그리드뷰에 추가
+                        dataGridView1.Rows.Add(l_arr); //데이터그리드뷰에 추가
                     }));
             }
         }
@@ -356,25 +357,25 @@ namespace eungsosil
             string l_buy_trd_yn;
             string l_sell_trd_yn;
 
-            foreach(DataGridViewRow Row in dataGridView1.Rows)
+            foreach (DataGridViewRow Row in dataGridView1.Rows)
             {
                 if (Convert.ToBoolean(Row.Cells[check.Name].Value) != true)
                 {
                     continue;
                 }
-                if(Convert.ToBoolean(Row.Cells[check.Name].Value) == true)
+                if (Convert.ToBoolean(Row.Cells[check.Name].Value) == true)
                 {
-                    l_jongmok_cd = Row.Cells[2].Value.ToString();
-                    l_jongmok_nm = Row.Cells[3].Value.ToString();
-                    l_priority = int.Parse(Row.Cells[1].Value.ToString());
-                    l_buy_amt = int.Parse(Row.Cells[4].Value.ToString());
-                    l_buy_price = int.Parse(Row.Cells[5].Value.ToString());
+                    l_jongmok_cd = Row.Cells["JONGMOK_CD"].Value.ToString();
+                    l_jongmok_nm = Row.Cells["JONGMOK_NM"].Value.ToString();
+                    l_priority = int.Parse(Row.Cells["PRIORITY"].Value.ToString());
+                    l_buy_amt = int.Parse(Row.Cells["BUY_AMT"].Value.ToString());
+                    l_buy_price = int.Parse(Row.Cells["BUY_PRICE"].Value.ToString());
 
-                    l_target_price = int.Parse(Row.Cells[6].Value.ToString());
-                    l_cut_loss_price = int.Parse(Row.Cells[7].Value.ToString());
+                    l_target_price = int.Parse(Row.Cells["TARGET_PRICE"].Value.ToString());
+                    l_cut_loss_price = int.Parse(Row.Cells["CUT_LOSS_PRICE"].Value.ToString());
 
-                    l_buy_trd_yn = Row.Cells[8].Value.ToString();
-                    l_sell_trd_yn = Row.Cells[9].Value.ToString();
+                    l_buy_trd_yn = Row.Cells["BUY_TRD_YN"].Value.ToString();
+                    l_sell_trd_yn = Row.Cells["SELL_TRD_YN"].Value.ToString();
 
                     conn = null;
                     conn = connect_db();
@@ -408,8 +409,9 @@ namespace eungsosil
                         cmd.ExecuteNonQuery();
                         MessageBox.Show("삽입 완료");
                     }
-                    catch(Exception ex)
+                    catch (Exception ex)
                     {
+                        MessageBox.Show(ex.Message);
                         //에러로그 출력
                     }
                     //메세지로그 출력 코드 
@@ -422,10 +424,15 @@ namespace eungsosil
         }
 
         //종목 수정버튼
+        /*
+         * DB Commit 기능 추가
+         * 수정 후 모든 체크 해제
+         */
         private void button3_Click(object sender, EventArgs e)
         {
             OracleCommand cmd;
             OracleConnection conn;
+            OracleTransaction transaction = null;
 
             string sql;
 
@@ -449,6 +456,7 @@ namespace eungsosil
                 {
                     l_jongmok_cd = Row.Cells[1].Value.ToString();
                     l_jongmok_nm = Row.Cells[2].Value.ToString();
+
                     l_priority = int.Parse(Row.Cells[3].Value.ToString());
                     l_buy_amt = int.Parse(Row.Cells[4].Value.ToString());
                     l_buy_price = int.Parse(Row.Cells[5].Value.ToString());
@@ -461,14 +469,13 @@ namespace eungsosil
 
                     conn = null;
                     conn = connect_db();
+                    transaction = conn.BeginTransaction();
 
-                    cmd = null;
                     cmd = new OracleCommand();
                     cmd.Connection = conn;
                     cmd.CommandType = CommandType.Text;
 
-                    sql = null;
-
+                    cmd.Transaction = transaction;
                     sql = @" UPDATE TB_TRD_JONGMOK
                             SET
                                 JONGMOK_NM = " + "'" + l_jongmok_nm + "'" + "," +
@@ -477,11 +484,11 @@ namespace eungsosil
                                 " BUY_PRICE = " + l_buy_price + "," +
                                 " TARGET_PRICE = " + l_target_price + "," +
                                 " CUT_LOSS_PRICE = " + l_cut_loss_price + "," +
-                                " BUY_TRD_YN = " + l_buy_trd_yn + "," +
-                                " SELL_TRD_YN = " + l_sell_trd_yn + "," +
-                                " UPDT_ID = " + g_user_id + "," +
+                                " BUY_TRD_YN = " + "'" + l_buy_trd_yn + "'" + "," +
+                                " SELL_TRD_YN = " + "'" + l_sell_trd_yn + "'" + "," +
+                                " UPDT_ID = " + "'" + g_user_id + "'" + "," +
                                 " UPDT_DTM = SYSDATE " +
-                            "WHERE JONGMMOK_CD = " + "'" + l_jongmok_cd + "'" +
+                            "WHERE JONGMOK_CD = " + "'" + l_jongmok_cd + "'" +
                             "AND USER_ID = " + "'" + g_user_id + "'";
 
                     cmd.CommandText = sql;
@@ -489,13 +496,25 @@ namespace eungsosil
                     try
                     {
                         cmd.ExecuteNonQuery();
+                        cmd.Transaction.Commit();
+                        MessageBox.Show("수정 성공");
                     }
                     catch (Exception ex)
                     {
-                        //에러로그 출력
+                        cmd.Transaction.Rollback();
+                        MessageBox.Show("수정 실패" + ex.Message);
                     }
                     //메세지로그 출력 코드 
                     conn.Close();
+                }
+            }
+
+            // 수정 이후 모든 체크 해제
+            foreach (DataGridViewRow Row in dataGridView1.Rows)
+            {
+                if (Convert.ToBoolean(Row.Cells[check.Name].Value))
+                {
+                    Row.Cells[check.Name].Value = false;
                 }
             }
         }
@@ -512,6 +531,7 @@ namespace eungsosil
 
             foreach (DataGridViewRow Row in dataGridView1.Rows)
             {
+
                 if (Convert.ToBoolean(Row.Cells[check.Name].Value) != true)
                 {
                     continue;
@@ -530,7 +550,7 @@ namespace eungsosil
 
                     sql = null;
 
-                    sql = @" DELETE FROM TB_TRD_JONGMOK " +
+                   sql = @" DELETE FROM TB_TRD_JONGMOK " +
                            " WHERE JONGMOK_CD = " + "'" + l_jongmok_cd + "'" +
                            " AND USER_ID = " + "'" + g_user_id + "'";
 
@@ -539,11 +559,12 @@ namespace eungsosil
                     try
                     {
                         cmd.ExecuteNonQuery();
+                        MessageBox.Show("삭제 완료");
                     }
                     catch (Exception ex)
                     {
                         //에러로그 출력
-                    }
+                    }   
                     //메세지로그 출력 코드 
                     conn.Close();
                 }
@@ -564,7 +585,7 @@ namespace eungsosil
 
         private void stock_info()
         {
-            Dictionary<string, string> dict = new Dictionary<string, string>();
+            dict = new Dictionary<string, string>();
 
             string code = axKHOpenAPI1.GetCodeListByMarket("0");
             string[] lst = code.Split(';');
@@ -890,7 +911,11 @@ namespace eungsosil
             requestInfo();
             requestChart();
             string d = DateTime.Now.ToString("yyyyMMdd");
-            axKHOpenAPI1.SetInputValue("종목코드", stockList.SelectedItem.ToString().Trim());
+            string code = stockList.SelectedItem.ToString().Trim();
+            int start = code.LastIndexOf('(');
+            int end = code.LastIndexOf(')');
+            code = code.Substring(start + 1, end - start - 1);
+            axKHOpenAPI1.SetInputValue("종목코드", code);
             axKHOpenAPI1.SetInputValue("기준일자", d);
             axKHOpenAPI1.SetInputValue("수정주가구분", "1");
 
@@ -914,24 +939,24 @@ namespace eungsosil
         {
             string l_cur_tm = null;
 
-            if(g_is_thread == 0)
+            if (g_is_thread == 0)
             {
                 g_is_thread = 1;
                 MessageBox.Show("자동매매가 시작되었습니다. \n");
             }
-            for(; ; )
+            for (; ; )
             {
                 l_cur_tm = get_cur_tm();
-                if(l_cur_tm.CompareTo("083001")>=0)
+                if (l_cur_tm.CompareTo("083001") >= 0)
                 {
                     //계좌 조회, 계좌정보 조회, 보유종목 매도수문 수행
                 }
-                if(l_cur_tm.CompareTo("090001")>=0)
+                if (l_cur_tm.CompareTo("090001") >= 0)
                 {
-                    for(; ; )
+                    for (; ; )
                     {
                         l_cur_tm = get_cur_tm();//현재시각 조회
-                        if(l_cur_tm.CompareTo("153001")>=0)
+                        if (l_cur_tm.CompareTo("153001") >= 0)
                         {
                             break;
                         }
@@ -971,18 +996,18 @@ namespace eungsosil
             try
             {
                 thread1.Abort();
-            }catch (Exception ex)
+            } catch (Exception ex)
             {
                 MessageBox.Show("자동매매 중지 (" + ex.Message + ")\n");
             }
-            this.Invoke(new MethodInvoker(() => 
+            this.Invoke(new MethodInvoker(() =>
                 {
-                if(thread1 != null)
-                {
-                    thread1.Interrupt();
-                    thread1 = null;
-                }
-            }));
+                    if (thread1 != null)
+                    {
+                        thread1.Interrupt();
+                        thread1 = null;
+                    }
+                }));
             g_is_thread = 0;
 
             MessageBox.Show("자동매매 중지 완료\n");
@@ -992,14 +1017,14 @@ namespace eungsosil
 
         private void btnAccount_Click(object sender, EventArgs e)
         {
-            if(axKHOpenAPI1.GetConnectState()!=1)
+            if (axKHOpenAPI1.GetConnectState() != 1)
             {
                 MessageBox.Show("로그인 후 이용해주세요!");
                 return;
             }
             accountForm af = new accountForm();
             DialogResult dResult = af.ShowDialog();
-          
+
 
         }
 
@@ -1047,7 +1072,7 @@ namespace eungsosil
                     //axKHOpenAPI1.CommRqData("종목정보요청", "opt10001", 0, "5000");
                 }
 
-               
+
             }
 
         }*/
@@ -1057,6 +1082,8 @@ namespace eungsosil
         {
 
         }
+    }
+}
         /*
 
 public void write_msg_log(String text, int is_clear)
@@ -1086,5 +1113,3 @@ if(this.textbox)
 
 
 }*/
-    }
-}
