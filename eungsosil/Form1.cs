@@ -57,7 +57,7 @@ namespace eungsosil
         private OracleConnection connect_db() //오라클 연결 변수 리턴
         {
             //   String conninfo = "User Id=ats;" +
-            //     "Passwor1234;" +
+            //     "Passwor=1234;" +
             //   "Data Source=(DESCRIPTION=" +
             // "(ADDRESS=(PROTOCOL=TCP)(HOST=localhost)(PORT=1521))" +
             //"(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=xe)) );"; //접속정보 변수저장
@@ -406,6 +406,7 @@ namespace eungsosil
                     try
                     {
                         cmd.ExecuteNonQuery();
+                        MessageBox.Show("삽입 완료");
                     }
                     catch(Exception ex)
                     {
