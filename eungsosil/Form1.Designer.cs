@@ -29,9 +29,9 @@ namespace eungsosil
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.mnuLogin = new System.Windows.Forms.ToolStripMenuItem();
@@ -71,13 +71,13 @@ namespace eungsosil
             this.button1 = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.comboBox3 = new System.Windows.Forms.ComboBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.price_text = new System.Windows.Forms.TextBox();
             this.lblCurPrice = new System.Windows.Forms.Label();
             this.lblEventname = new System.Windows.Forms.Label();
-            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.buyAmount = new System.Windows.Forms.NumericUpDown();
+            this.sellAmount = new System.Windows.Forms.NumericUpDown();
+            this.name_text = new System.Windows.Forms.TextBox();
+            this.code_text = new System.Windows.Forms.TextBox();
             this.lblBuyPrice = new System.Windows.Forms.Label();
             this.lblNum = new System.Windows.Forms.Label();
             this.lblSelect = new System.Windows.Forms.Label();
@@ -118,8 +118,8 @@ namespace eungsosil
             this.statusStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.buyAmount)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sellAmount)).BeginInit();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.stockChart)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
@@ -195,7 +195,6 @@ namespace eungsosil
             this.cmbAcnum1.Name = "cmbAcnum1";
             this.cmbAcnum1.Size = new System.Drawing.Size(252, 20);
             this.cmbAcnum1.TabIndex = 3;
-            this.cmbAcnum1.SelectedIndexChanged += new System.EventHandler(this.cmbAcnum1_SelectedIndexChanged_1);
             // 
             // lblAcnum1
             // 
@@ -249,7 +248,7 @@ namespace eungsosil
             this.btnAutoEnd.Name = "btnAutoEnd";
             this.btnAutoEnd.Size = new System.Drawing.Size(79, 74);
             this.btnAutoEnd.TabIndex = 6;
-            this.btnAutoEnd.Text = "자동매매\r\n종료";
+            this.btnAutoEnd.Text = "매도";
             this.btnAutoEnd.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage;
             this.btnAutoEnd.UseVisualStyleBackColor = false;
             this.btnAutoEnd.Click += new System.EventHandler(this.btnAutoEnd_Click);
@@ -261,7 +260,7 @@ namespace eungsosil
             this.btnAuto.Name = "btnAuto";
             this.btnAuto.Size = new System.Drawing.Size(79, 74);
             this.btnAuto.TabIndex = 5;
-            this.btnAuto.Text = "자동매매\r\n시작";
+            this.btnAuto.Text = "매수";
             this.btnAuto.UseVisualStyleBackColor = false;
             this.btnAuto.Click += new System.EventHandler(this.btnAuto_Click);
             // 
@@ -502,14 +501,14 @@ namespace eungsosil
             // 
             this.groupBox2.Controls.Add(this.comboBox3);
             this.groupBox2.Controls.Add(this.btnAutoEnd);
-            this.groupBox2.Controls.Add(this.textBox5);
+            this.groupBox2.Controls.Add(this.price_text);
             this.groupBox2.Controls.Add(this.btnAuto);
             this.groupBox2.Controls.Add(this.lblCurPrice);
             this.groupBox2.Controls.Add(this.lblEventname);
-            this.groupBox2.Controls.Add(this.numericUpDown2);
-            this.groupBox2.Controls.Add(this.numericUpDown1);
-            this.groupBox2.Controls.Add(this.textBox4);
-            this.groupBox2.Controls.Add(this.textBox3);
+            this.groupBox2.Controls.Add(this.buyAmount);
+            this.groupBox2.Controls.Add(this.sellAmount);
+            this.groupBox2.Controls.Add(this.name_text);
+            this.groupBox2.Controls.Add(this.code_text);
             this.groupBox2.Controls.Add(this.lblBuyPrice);
             this.groupBox2.Controls.Add(this.lblNum);
             this.groupBox2.Controls.Add(this.lblSelect);
@@ -541,13 +540,13 @@ namespace eungsosil
             this.comboBox3.Size = new System.Drawing.Size(162, 20);
             this.comboBox3.TabIndex = 11;
             // 
-            // textBox5
+            // price_text
             // 
-            this.textBox5.Location = new System.Drawing.Point(101, 90);
-            this.textBox5.Margin = new System.Windows.Forms.Padding(2);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(162, 21);
-            this.textBox5.TabIndex = 0;
+            this.price_text.Location = new System.Drawing.Point(101, 90);
+            this.price_text.Margin = new System.Windows.Forms.Padding(2);
+            this.price_text.Name = "price_text";
+            this.price_text.Size = new System.Drawing.Size(162, 21);
+            this.price_text.TabIndex = 0;
             // 
             // lblCurPrice
             // 
@@ -557,7 +556,7 @@ namespace eungsosil
             this.lblCurPrice.Name = "lblCurPrice";
             this.lblCurPrice.Size = new System.Drawing.Size(61, 12);
             this.lblCurPrice.TabIndex = 12;
-            this.lblCurPrice.Text = "시장가격 :";
+            this.lblCurPrice.Text = "희망가격 :";
             // 
             // lblEventname
             // 
@@ -569,37 +568,37 @@ namespace eungsosil
             this.lblEventname.TabIndex = 10;
             this.lblEventname.Text = "종목이름 :";
             // 
-            // numericUpDown2
+            // buyAmount
             // 
-            this.numericUpDown2.Location = new System.Drawing.Point(346, 64);
-            this.numericUpDown2.Margin = new System.Windows.Forms.Padding(2);
-            this.numericUpDown2.Name = "numericUpDown2";
-            this.numericUpDown2.Size = new System.Drawing.Size(160, 21);
-            this.numericUpDown2.TabIndex = 9;
+            this.buyAmount.Location = new System.Drawing.Point(346, 64);
+            this.buyAmount.Margin = new System.Windows.Forms.Padding(2);
+            this.buyAmount.Name = "buyAmount";
+            this.buyAmount.Size = new System.Drawing.Size(160, 21);
+            this.buyAmount.TabIndex = 9;
             // 
-            // numericUpDown1
+            // sellAmount
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(346, 90);
-            this.numericUpDown1.Margin = new System.Windows.Forms.Padding(2);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(160, 21);
-            this.numericUpDown1.TabIndex = 8;
+            this.sellAmount.Location = new System.Drawing.Point(346, 90);
+            this.sellAmount.Margin = new System.Windows.Forms.Padding(2);
+            this.sellAmount.Name = "sellAmount";
+            this.sellAmount.Size = new System.Drawing.Size(160, 21);
+            this.sellAmount.TabIndex = 8;
             // 
-            // textBox4
+            // name_text
             // 
-            this.textBox4.Location = new System.Drawing.Point(101, 62);
-            this.textBox4.Margin = new System.Windows.Forms.Padding(2);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(162, 21);
-            this.textBox4.TabIndex = 7;
+            this.name_text.Location = new System.Drawing.Point(101, 62);
+            this.name_text.Margin = new System.Windows.Forms.Padding(2);
+            this.name_text.Name = "name_text";
+            this.name_text.Size = new System.Drawing.Size(162, 21);
+            this.name_text.TabIndex = 7;
             // 
-            // textBox3
+            // code_text
             // 
-            this.textBox3.Location = new System.Drawing.Point(101, 36);
-            this.textBox3.Margin = new System.Windows.Forms.Padding(2);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(162, 21);
-            this.textBox3.TabIndex = 6;
+            this.code_text.Location = new System.Drawing.Point(101, 36);
+            this.code_text.Margin = new System.Windows.Forms.Padding(2);
+            this.code_text.Name = "code_text";
+            this.code_text.Size = new System.Drawing.Size(162, 21);
+            this.code_text.TabIndex = 6;
             // 
             // lblBuyPrice
             // 
@@ -609,7 +608,7 @@ namespace eungsosil
             this.lblBuyPrice.Name = "lblBuyPrice";
             this.lblBuyPrice.Size = new System.Drawing.Size(61, 12);
             this.lblBuyPrice.TabIndex = 5;
-            this.lblBuyPrice.Text = "매수가격 :";
+            this.lblBuyPrice.Text = "매도가격 :";
             // 
             // lblNum
             // 
@@ -657,23 +656,23 @@ namespace eungsosil
             // 
             // stockChart
             // 
-            chartArea2.AxisX.IsReversed = true;
-            chartArea2.CursorX.IsUserSelectionEnabled = true;
-            chartArea2.Name = "ChartArea1";
-            this.stockChart.ChartAreas.Add(chartArea2);
+            chartArea1.AxisX.IsReversed = true;
+            chartArea1.CursorX.IsUserSelectionEnabled = true;
+            chartArea1.Name = "ChartArea1";
+            this.stockChart.ChartAreas.Add(chartArea1);
             this.stockChart.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend2.Name = "Legend1";
-            this.stockChart.Legends.Add(legend2);
+            legend1.Name = "Legend1";
+            this.stockChart.Legends.Add(legend1);
             this.stockChart.Location = new System.Drawing.Point(2, 116);
             this.stockChart.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.stockChart.Name = "stockChart";
-            series2.ChartArea = "ChartArea1";
-            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Candlestick;
-            series2.CustomProperties = "PriceDownColor=Blue, PriceUpColor=Red";
-            series2.Legend = "Legend1";
-            series2.Name = "chart_data";
-            series2.YValuesPerPoint = 4;
-            this.stockChart.Series.Add(series2);
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Candlestick;
+            series1.CustomProperties = "PriceDownColor=Blue, PriceUpColor=Red";
+            series1.Legend = "Legend1";
+            series1.Name = "chart_data";
+            series1.YValuesPerPoint = 4;
+            this.stockChart.Series.Add(series1);
             this.stockChart.Size = new System.Drawing.Size(852, 376);
             this.stockChart.TabIndex = 19;
             this.stockChart.Text = "chart1";
@@ -1072,8 +1071,8 @@ namespace eungsosil
             this.panel1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.buyAmount)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sellAmount)).EndInit();
             this.groupBox3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.stockChart)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
@@ -1104,14 +1103,14 @@ namespace eungsosil
         private System.Windows.Forms.GroupBox grp2;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.TextBox price_text;
         private System.Windows.Forms.Label lblCurPrice;
         private System.Windows.Forms.ComboBox comboBox3;
         private System.Windows.Forms.Label lblEventname;
-        private System.Windows.Forms.NumericUpDown numericUpDown2;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.NumericUpDown buyAmount;
+        private System.Windows.Forms.NumericUpDown sellAmount;
+        private System.Windows.Forms.TextBox name_text;
+        private System.Windows.Forms.TextBox code_text;
         private System.Windows.Forms.Label lblBuyPrice;
         private System.Windows.Forms.Label lblNum;
         private System.Windows.Forms.Label lblSelect;
