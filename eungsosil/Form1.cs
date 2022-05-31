@@ -22,7 +22,7 @@ namespace eungsosil
         string g_user_name = null;
         List<PriceInfo> priceList;
         Dictionary<string, string> dict = new Dictionary<string, string>(); // 코드명, 주식이름 저장 dict
-        Dictionary<String, int> stock_dict = new Dictionary<string, int>(); // 주식명, 수량 저장 dict
+        Dictionary<string, int> stock_dict; // 보유 주식 현황 확인  dict
 
         /* 자동매매 변수 추가 */
         int acAll;
@@ -208,9 +208,6 @@ namespace eungsosil
             //write_msg_log("사용할 증권계좌번호는 ; [" + g_accnt_no + "] 입니다. \n", 0);
         }
 
-
-
-        
         //거래종목 조회
         private void button1_Click(object sender, EventArgs e)
         {
@@ -420,7 +417,6 @@ namespace eungsosil
          * DB Commit 기능 추가
          * 수정 후 모든 체크 해제
          */
-        
         private void button3_Click(object sender, EventArgs e)
         {
             OracleCommand cmd;
@@ -566,7 +562,6 @@ namespace eungsosil
 
 
         /* 차트 */
-
         class PriceInfo
         {
             public string date { get; set; }
@@ -633,6 +628,7 @@ namespace eungsosil
                 MessageBox.Show("정보요청 실패");
 
         }
+
         /* 실시간 데이터 수신 */
         private void axKHOpenAPI1_OnReceiveRealData(object sender, AxKHOpenAPILib._DKHOpenAPIEvents_OnReceiveRealDataEvent e)
         {
@@ -876,9 +872,22 @@ namespace eungsosil
                 {
                     string name = axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, i, "종목명").Trim();
                     string code = axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, i, "종목코드").Trim();
-                    int stock_amount = Int32.Parse(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "보유수량").Trim());
+                    int stock_amount = Int32.Parse(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, i, "보유수량").Trim());
                     stock_dict.Add(name, stock_amount);
                 }
+                // 매도 매수 부분 텍스트 입력
+                string stock_code = stockList.SelectedItem.ToString().Trim();
+                int start = stock_code.LastIndexOf('(');
+                int end = stock_code.LastIndexOf(')');
+                stock_code = stock_code.Substring(start + 1, end - start - 1);
+                name_text.Text = axKHOpenAPI1.GetMasterCodeName(stock_code);
+                code_text.Text = stock_code;
+                price_text.Text = axKHOpenAPI1.GetMasterLastPrice(stock_code).TrimStart('0');
+
+                if (!stock_dict.ContainsKey(name_text.Text))
+                    stock_amount.Text = "0";
+                else
+                    stock_amount.Text = stock_dict[name_text.Text].ToString();
             }
         }
 
@@ -889,6 +898,7 @@ namespace eungsosil
             return date == now_time;
         }
 
+        // 차트 축 변경시 발생하는 이벤트
         private void stockChart_AxisViewChanged(object sender, System.Windows.Forms.DataVisualization.Charting.ViewEventArgs e)
         {
             int startPosition = (int)e.Axis.ScaleView.ViewMinimum;
@@ -911,6 +921,7 @@ namespace eungsosil
             stockChart.ChartAreas[0].AxisY.Maximum = max;
             stockChart.ChartAreas[0].AxisY.Minimum = min;
         }
+
 
         private void searchBtn_Click(object sender, EventArgs e)
         {
@@ -936,73 +947,40 @@ namespace eungsosil
             int start = code.LastIndexOf('(');
             int end = code.LastIndexOf(')');
             code = code.Substring(start + 1, end - start - 1);
+
             axKHOpenAPI1.SetInputValue("종목코드", code);
             axKHOpenAPI1.SetInputValue("기준일자", d);
             axKHOpenAPI1.SetInputValue("수정주가구분", "1");
-
-            // 매수 & 매도 부분에 텍스트 추가
-            name_text.Text = axKHOpenAPI1.GetMasterCodeName(code);
-            code_text.Text = code;
-            price_text.Text = axKHOpenAPI1.GetMasterLastPrice(code).TrimStart('0');
-
             int nRet = axKHOpenAPI1.CommRqData("주식일봉차트조회", "OPT10081", 0, "1002");
             if (nRet != 0)
                 MessageBox.Show("차트조회 실패");
-        }
 
-        /*
-        //자동매매
-        public void m_thread1()
-        {
-            string l_cur_tm = null;
-
-            if (g_is_thread == 0)
-            {
-                g_is_thread = 1;
-                MessageBox.Show("자동매매가 시작되었습니다. \n");
-            }
-            for (; ; )
-            {
-                l_cur_tm = get_cur_tm();
-                if (l_cur_tm.CompareTo("083001") >= 0)
-                {
-                    //계좌 조회, 계좌정보 조회, 보유종목 매도수문 수행
-                }
-                if (l_cur_tm.CompareTo("090001") >= 0)
-                {
-                    for (; ; )
-                    {
-                        l_cur_tm = get_cur_tm();//현재시각 조회
-                        if (l_cur_tm.CompareTo("153001") >= 0)
-                        {
-                            break;
-                        }
-                        delay(200);
-                    }
-                }
-                delay(200);
-            }
+            string account = cmbAcnum1.SelectedItem.ToString();
+            axKHOpenAPI1.SetInputValue("계좌번호", account);
+            axKHOpenAPI1.SetInputValue("비밀번호", "");
+            axKHOpenAPI1.SetInputValue("상장폐지조회구분", "0");
+            axKHOpenAPI1.SetInputValue("비밀번호입력매체구분", "00");
+            int result = axKHOpenAPI1.CommRqData("계좌평가현황요청", "OPW00004", 0, "7000");
         }
-        */
 
         /* 매수 버튼 클릭 */
         private void btnAuto_Click(object sender, EventArgs e)
         {
             if (axKHOpenAPI1.GetConnectState() != 1)
             {
-                MessageBox.Show("로그인 후 이용해주세요!");
+                MessageBox.Show("로그인 후 이용해주세요!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
             if(code_text.Text == "" || name_text.Text == "" || price_text.Text == "")
             {
-                MessageBox.Show("모든 항목을 입력해 주세요");
+                MessageBox.Show("모든 항목을 입력해 주세요", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
             if(buyAmount.Value <= 0)
             {
-                MessageBox.Show("올바른 수량을 입력해 주세요");
+                MessageBox.Show("올바른 수량을 입력해 주세요", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -1015,51 +993,59 @@ namespace eungsosil
 
             if(result == 0) // 결과가 0인 경우 주문 성공
             {
-                write_msg_log("종목명 : " + name_text.Text + ", 수량 : " + buy_amount + ", 가격 : " + buy_price + "]" + " 매수요청\n", 0);
+                write_msg_log("종목명 : " + name_text.Text + ", 수량 : " + buy_amount + ", 가격 : " + buy_price + "]" + " 매수요청", 0);
             }
             else
             {
                 write_msg_log("주문 확인 요망", 0);
             }
             buyAmount.Value = 0;
-            //axKHOpenAPI1.SetInputValue("종목코드", code);
-            //axKHOpenAPI1.CommRqData("종목정보요청", "opt10001", 0, "5000");
         }
 
         /* 매도 버튼 클릭 */
         private void btnAutoEnd_Click(object sender, EventArgs e)
         {
-
-            if(axKHOpenAPI1.GetConnectState() != 1)
+            if (axKHOpenAPI1.GetConnectState() != 1)
             {
-                MessageBox.Show("로그인 후 이용해주세요!");
+                MessageBox.Show("로그인 후 이용해주세요!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             if (code_text.Text == "" || name_text.Text == "" || price_text.Text == "")
             {
-                MessageBox.Show("모든 항목을 입력해 주세요");
+                MessageBox.Show("모든 항목을 입력해 주세요", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             if(sellAmount.Value <= 0)
             {
-                MessageBox.Show("올바른 수량을 입력해 주세요");
+                MessageBox.Show("올바른 수량을 입력해 주세요", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            
+
             string account = cmbAcnum1.SelectedItem.ToString(); // 계좌번호
             string code = code_text.Text;   // 종목 코드
             int sell_amount = (int)sellAmount.Value;  // 매도량
             int buy_price = Int32.Parse(price_text.Text);   // 매도가
+
             axKHOpenAPI1.SetInputValue("계좌번호", account);
             axKHOpenAPI1.SetInputValue("비밀번호", "");
             axKHOpenAPI1.SetInputValue("상장폐지조회구분", "0");
             axKHOpenAPI1.SetInputValue("비밀번호입력매체구분", "00");
-
-            int nRet = axKHOpenAPI1.CommRqData("계좌평가현황요청", "OPW00004", 0, "7000");
+            if(Int32.Parse(stock_amount.Text) == 0)
+            {
+                MessageBox.Show("계좌에 존재하지 않는 종목입니다.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            else if(Int32.Parse(stock_amount.Text) < (int)sellAmount.Value)
+            {
+                MessageBox.Show("매도수량이 보유량보다 많습니다.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            
             int result = axKHOpenAPI1.SendOrder("현금매도주문", "5001", account, 2, code, sell_amount, buy_price, "00", "");   // 서버에 주문 요청
+
             if(result == 0)
             {
-                write_msg_log("종목명 : " + name_text.Text + ", 수량 : " + sell_amount + ", 가격 : " + buy_price + "]" + " 매도요청\n", 0);
+                write_msg_log("종목명 : " + name_text.Text + ", 수량 : " + sell_amount + ", 가격 : " + buy_price + "]" + " 매도요청", 0);
             }
             else
             {
@@ -1072,7 +1058,7 @@ namespace eungsosil
         {
             if (axKHOpenAPI1.GetConnectState() != 1)
             {
-                MessageBox.Show("로그인 후 이용해주세요!");
+                MessageBox.Show("로그인 후 이용해주세요!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -1104,6 +1090,8 @@ namespace eungsosil
             l_cur_tm = l_cur_time.ToString("HH:mm:ss");
             l_cur_dtm = "[" + l_cur_dt + " " + l_cur_tm + "]";
 
+            status.Items.Add(l_cur_dtm + text);
+            /*
             if (is_clear == 1)
             {
                 if (textBox1.InvokeRequired)
@@ -1126,30 +1114,46 @@ namespace eungsosil
                 {
                     textBox1.AppendText(l_cur_dtm + text);
                 }
-            }
+            }*/
         }
 
         // 자동매매 발생 이벤트1
         private void axKHOpenAPI1_OnReceiveChejanData(object sender, AxKHOpenAPILib._DKHOpenAPIEvents_OnReceiveChejanDataEvent e)
         {
-
             if(e.sGubun == "0")
             {
-                write_msg_log("주문 체결 통보", 0);
-                write_msg_log("=====================================================\n", 0);
-                write_msg_log("주문 구분:" + axKHOpenAPI1.GetChejanData(907) + "\n", 0);
-                write_msg_log("체결시간 : " + axKHOpenAPI1.GetChejanData(908) + "\n", 0);
-                write_msg_log("종목코드: " + axKHOpenAPI1.GetChejanData(9001) + "\n", 0);
-                write_msg_log("종목명: " + axKHOpenAPI1.GetChejanData(302) + "\n", 0);
-                write_msg_log("주문수량: " + axKHOpenAPI1.GetChejanData(900) + "\n", 0);
-                write_msg_log("체결수량: " + axKHOpenAPI1.GetChejanData(911) + "\n", 0);
-                write_msg_log("체결가격 : " + axKHOpenAPI1.GetChejanData(910) + "\n", 0);
-                write_msg_log("=====================================================\n", 0);
+                string type = axKHOpenAPI1.GetChejanData(913).Trim();
+                string gb = axKHOpenAPI1.GetChejanData(907).Trim();
+
+                if (gb == "1")
+                {
+                    gb = "매도";
+                }
+                else if (gb == "2")
+                {
+                    gb = "매수";
+                }
+
+                if(type == "체결")
+                {
+                    write_msg_log("주문 체결 통보", 0);
+                    write_msg_log("주문 구분:" + gb + "\n", 0); // 1 : 매도, 2 : 매수
+                    write_msg_log("종목명: " + axKHOpenAPI1.GetChejanData(302), 0);
+                    write_msg_log("주문수량: " + axKHOpenAPI1.GetChejanData(900), 0);
+                    write_msg_log("체결수량: " + axKHOpenAPI1.GetChejanData(911), 0);
+                    write_msg_log("체결가격 : " + axKHOpenAPI1.GetChejanData(910), 0);
+                    status.Items.Add("=====================================================");
+                    status.Items.Add("");
+                }
             }
 
             else if(e.sGubun == "1")
             {
-
+                write_msg_log("잔고 통보", 0);
+                write_msg_log("종목명: " + axKHOpenAPI1.GetChejanData(302) + "\n", 0);
+                write_msg_log("보유수량: " + axKHOpenAPI1.GetChejanData(930), 0);
+                stock_amount.Text = axKHOpenAPI1.GetChejanData(930);
+                status.Items.Add("");
             }
 
 
