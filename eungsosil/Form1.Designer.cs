@@ -70,7 +70,7 @@ namespace eungsosil
             this.stockList = new System.Windows.Forms.ComboBox();
             this.button1 = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.comboBox3 = new System.Windows.Forms.ComboBox();
+            this.stock_amount = new System.Windows.Forms.TextBox();
             this.price_text = new System.Windows.Forms.TextBox();
             this.lblCurPrice = new System.Windows.Forms.Label();
             this.lblEventname = new System.Windows.Forms.Label();
@@ -107,7 +107,7 @@ namespace eungsosil
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.status = new System.Windows.Forms.ListBox();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.splitter2 = new System.Windows.Forms.Splitter();
@@ -243,7 +243,7 @@ namespace eungsosil
             // 
             // btnAutoEnd
             // 
-            this.btnAutoEnd.Location = new System.Drawing.Point(624, 36);
+            this.btnAutoEnd.Location = new System.Drawing.Point(641, 36);
             this.btnAutoEnd.Margin = new System.Windows.Forms.Padding(2);
             this.btnAutoEnd.Name = "btnAutoEnd";
             this.btnAutoEnd.Size = new System.Drawing.Size(79, 74);
@@ -255,7 +255,7 @@ namespace eungsosil
             // 
             // btnAuto
             // 
-            this.btnAuto.Location = new System.Drawing.Point(530, 36);
+            this.btnAuto.Location = new System.Drawing.Point(547, 36);
             this.btnAuto.Margin = new System.Windows.Forms.Padding(2);
             this.btnAuto.Name = "btnAuto";
             this.btnAuto.Size = new System.Drawing.Size(79, 74);
@@ -430,7 +430,7 @@ namespace eungsosil
             this.searchBtn.Name = "searchBtn";
             this.searchBtn.Size = new System.Drawing.Size(79, 24);
             this.searchBtn.TabIndex = 20;
-            this.searchBtn.Text = "차트조회";
+            this.searchBtn.Text = "정보조회";
             this.searchBtn.UseVisualStyleBackColor = true;
             this.searchBtn.Click += new System.EventHandler(this.searchBtn_Click);
             // 
@@ -499,7 +499,7 @@ namespace eungsosil
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.comboBox3);
+            this.groupBox2.Controls.Add(this.stock_amount);
             this.groupBox2.Controls.Add(this.btnAutoEnd);
             this.groupBox2.Controls.Add(this.price_text);
             this.groupBox2.Controls.Add(this.btnAuto);
@@ -523,26 +523,17 @@ namespace eungsosil
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "매매";
             // 
-            // comboBox3
+            // stock_amount
             // 
-            this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Items.AddRange(new object[] {
-            "지정가",
-            "시장가",
-            "조건부지정가",
-            "최유리지정가",
-            "최우선지정가",
-            "장전 시간외",
-            "장후 시간외"});
-            this.comboBox3.Location = new System.Drawing.Point(346, 36);
-            this.comboBox3.Margin = new System.Windows.Forms.Padding(2);
-            this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(162, 20);
-            this.comboBox3.TabIndex = 11;
+            this.stock_amount.Location = new System.Drawing.Point(358, 35);
+            this.stock_amount.Name = "stock_amount";
+            this.stock_amount.ReadOnly = true;
+            this.stock_amount.Size = new System.Drawing.Size(161, 21);
+            this.stock_amount.TabIndex = 13;
             // 
             // price_text
             // 
-            this.price_text.Location = new System.Drawing.Point(101, 90);
+            this.price_text.Location = new System.Drawing.Point(114, 90);
             this.price_text.Margin = new System.Windows.Forms.Padding(2);
             this.price_text.Name = "price_text";
             this.price_text.Size = new System.Drawing.Size(162, 21);
@@ -551,7 +542,7 @@ namespace eungsosil
             // lblCurPrice
             // 
             this.lblCurPrice.AutoSize = true;
-            this.lblCurPrice.Location = new System.Drawing.Point(32, 92);
+            this.lblCurPrice.Location = new System.Drawing.Point(45, 92);
             this.lblCurPrice.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblCurPrice.Name = "lblCurPrice";
             this.lblCurPrice.Size = new System.Drawing.Size(61, 12);
@@ -561,7 +552,7 @@ namespace eungsosil
             // lblEventname
             // 
             this.lblEventname.AutoSize = true;
-            this.lblEventname.Location = new System.Drawing.Point(32, 66);
+            this.lblEventname.Location = new System.Drawing.Point(45, 66);
             this.lblEventname.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblEventname.Name = "lblEventname";
             this.lblEventname.Size = new System.Drawing.Size(61, 12);
@@ -570,7 +561,7 @@ namespace eungsosil
             // 
             // buyAmount
             // 
-            this.buyAmount.Location = new System.Drawing.Point(346, 64);
+            this.buyAmount.Location = new System.Drawing.Point(359, 64);
             this.buyAmount.Margin = new System.Windows.Forms.Padding(2);
             this.buyAmount.Name = "buyAmount";
             this.buyAmount.Size = new System.Drawing.Size(160, 21);
@@ -578,7 +569,7 @@ namespace eungsosil
             // 
             // sellAmount
             // 
-            this.sellAmount.Location = new System.Drawing.Point(346, 90);
+            this.sellAmount.Location = new System.Drawing.Point(359, 90);
             this.sellAmount.Margin = new System.Windows.Forms.Padding(2);
             this.sellAmount.Name = "sellAmount";
             this.sellAmount.Size = new System.Drawing.Size(160, 21);
@@ -586,34 +577,36 @@ namespace eungsosil
             // 
             // name_text
             // 
-            this.name_text.Location = new System.Drawing.Point(101, 62);
+            this.name_text.Location = new System.Drawing.Point(114, 62);
             this.name_text.Margin = new System.Windows.Forms.Padding(2);
             this.name_text.Name = "name_text";
+            this.name_text.ReadOnly = true;
             this.name_text.Size = new System.Drawing.Size(162, 21);
             this.name_text.TabIndex = 7;
             // 
             // code_text
             // 
-            this.code_text.Location = new System.Drawing.Point(101, 36);
+            this.code_text.Location = new System.Drawing.Point(114, 36);
             this.code_text.Margin = new System.Windows.Forms.Padding(2);
             this.code_text.Name = "code_text";
+            this.code_text.ReadOnly = true;
             this.code_text.Size = new System.Drawing.Size(162, 21);
             this.code_text.TabIndex = 6;
             // 
             // lblBuyPrice
             // 
             this.lblBuyPrice.AutoSize = true;
-            this.lblBuyPrice.Location = new System.Drawing.Point(278, 94);
+            this.lblBuyPrice.Location = new System.Drawing.Point(291, 94);
             this.lblBuyPrice.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblBuyPrice.Name = "lblBuyPrice";
             this.lblBuyPrice.Size = new System.Drawing.Size(61, 12);
             this.lblBuyPrice.TabIndex = 5;
-            this.lblBuyPrice.Text = "매도가격 :";
+            this.lblBuyPrice.Text = "매도수량 :";
             // 
             // lblNum
             // 
             this.lblNum.AutoSize = true;
-            this.lblNum.Location = new System.Drawing.Point(278, 66);
+            this.lblNum.Location = new System.Drawing.Point(291, 66);
             this.lblNum.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblNum.Name = "lblNum";
             this.lblNum.Size = new System.Drawing.Size(61, 12);
@@ -623,17 +616,17 @@ namespace eungsosil
             // lblSelect
             // 
             this.lblSelect.AutoSize = true;
-            this.lblSelect.Location = new System.Drawing.Point(278, 38);
+            this.lblSelect.Location = new System.Drawing.Point(292, 41);
             this.lblSelect.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblSelect.Name = "lblSelect";
-            this.lblSelect.Size = new System.Drawing.Size(53, 12);
+            this.lblSelect.Size = new System.Drawing.Size(61, 12);
             this.lblSelect.TabIndex = 3;
-            this.lblSelect.Text = "거래구분";
+            this.lblSelect.Text = "현보유량 :";
             // 
             // lblCode
             // 
             this.lblCode.AutoSize = true;
-            this.lblCode.Location = new System.Drawing.Point(32, 38);
+            this.lblCode.Location = new System.Drawing.Point(45, 38);
             this.lblCode.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblCode.Name = "lblCode";
             this.lblCode.Size = new System.Drawing.Size(61, 12);
@@ -954,7 +947,6 @@ namespace eungsosil
             this.axKHOpenAPI1.Visible = false;
             this.axKHOpenAPI1.OnReceiveTrData += new AxKHOpenAPILib._DKHOpenAPIEvents_OnReceiveTrDataEventHandler(this.axKHOpenAPI1_OnReceiveTrData);
             this.axKHOpenAPI1.OnReceiveRealData += new AxKHOpenAPILib._DKHOpenAPIEvents_OnReceiveRealDataEventHandler(this.axKHOpenAPI1_OnReceiveRealData);
-            this.axKHOpenAPI1.OnReceiveMsg += new AxKHOpenAPILib._DKHOpenAPIEvents_OnReceiveMsgEventHandler(this.axKHOpenAPI1_OnReceiveMsg);
             this.axKHOpenAPI1.OnReceiveChejanData += new AxKHOpenAPILib._DKHOpenAPIEvents_OnReceiveChejanDataEventHandler(this.axKHOpenAPI1_OnReceiveChejanData);
             // 
             // panel3
@@ -983,7 +975,7 @@ namespace eungsosil
             // 
             // groupBox5
             // 
-            this.groupBox5.Controls.Add(this.textBox1);
+            this.groupBox5.Controls.Add(this.status);
             this.groupBox5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox5.Location = new System.Drawing.Point(0, 524);
             this.groupBox5.Margin = new System.Windows.Forms.Padding(2);
@@ -994,18 +986,17 @@ namespace eungsosil
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "로그";
             // 
-            // textBox1
+            // status
             // 
-            this.textBox1.BackColor = System.Drawing.Color.Black;
-            this.textBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox1.ForeColor = System.Drawing.Color.Lime;
-            this.textBox1.Location = new System.Drawing.Point(2, 16);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(2);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBox1.Size = new System.Drawing.Size(487, 86);
-            this.textBox1.TabIndex = 0;
+            this.status.BackColor = System.Drawing.Color.Black;
+            this.status.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.status.Font = new System.Drawing.Font("굴림", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.status.ForeColor = System.Drawing.Color.Lime;
+            this.status.FormattingEnabled = true;
+            this.status.Location = new System.Drawing.Point(2, 16);
+            this.status.Name = "status";
+            this.status.Size = new System.Drawing.Size(487, 86);
+            this.status.TabIndex = 0;
             // 
             // splitter1
             // 
@@ -1081,7 +1072,6 @@ namespace eungsosil
             this.panel3.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
             this.groupBox5.ResumeLayout(false);
-            this.groupBox5.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -1105,7 +1095,6 @@ namespace eungsosil
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.TextBox price_text;
         private System.Windows.Forms.Label lblCurPrice;
-        private System.Windows.Forms.ComboBox comboBox3;
         private System.Windows.Forms.Label lblEventname;
         private System.Windows.Forms.NumericUpDown buyAmount;
         private System.Windows.Forms.NumericUpDown sellAmount;
@@ -1153,7 +1142,6 @@ namespace eungsosil
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.GroupBox groupBox5;
-        private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Splitter splitter1;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.Splitter splitter2;
@@ -1168,6 +1156,8 @@ namespace eungsosil
         private System.Windows.Forms.DataGridViewComboBoxColumn buy_trd_yn;
         private System.Windows.Forms.DataGridViewComboBoxColumn sell_trd_yn;
         private System.Windows.Forms.DataGridViewCheckBoxColumn check;
+        private System.Windows.Forms.ListBox status;
+        private System.Windows.Forms.TextBox stock_amount;
     }
 }
 
