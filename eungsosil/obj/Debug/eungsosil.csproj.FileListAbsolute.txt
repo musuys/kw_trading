@@ -456,3 +456,4 @@ C:\Users\cyz06\Desktop\0601\eungsosil\obj\Debug\eungsosil.csproj.GenerateResourc
 C:\Users\cyz06\Desktop\0601\eungsosil\obj\Debug\eungsosil.csproj.CoreCompileInputs.cache
 C:\Users\cyz06\Desktop\0601\eungsosil\obj\Debug\eungsosil.exe
 C:\Users\cyz06\Desktop\0601\eungsosil\obj\Debug\eungsosil.pdb
+C:\Users\user\github\kw_trading\eungsosil\obj\Debug\eungsosil.csproj.AssemblyReference.cache
