@@ -48,27 +48,12 @@ namespace eungsosil
             this.btnAuto = new System.Windows.Forms.Button();
             this.grp2 = new System.Windows.Forms.GroupBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.seq = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.jongmok_cd = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.jongmok_nm = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.priority = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.buy_amt = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.buy_price = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.target_price = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cut_loss_price = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.buy_trd_yn = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.sell_trd_yn = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.check = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.searchBtn = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
             this.stockList = new System.Windows.Forms.ComboBox();
-            this.button1 = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.stock_amount = new System.Windows.Forms.TextBox();
             this.price_text = new System.Windows.Forms.TextBox();
@@ -111,6 +96,16 @@ namespace eungsosil
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.splitter2 = new System.Windows.Forms.Splitter();
+            this.seq = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.jongmok_nm = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.average_price = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.buy_price = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.profit = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.profit_amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.profit_loss_rate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.today_buy = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.today_sell = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menuStrip.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.grp2.SuspendLayout();
@@ -211,6 +206,7 @@ namespace eungsosil
             this.txtName.Location = new System.Drawing.Point(276, 18);
             this.txtName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtName.Name = "txtName";
+            this.txtName.ReadOnly = true;
             this.txtName.Size = new System.Drawing.Size(100, 21);
             this.txtName.TabIndex = 0;
             // 
@@ -228,6 +224,7 @@ namespace eungsosil
             this.txtID.Location = new System.Drawing.Point(64, 18);
             this.txtID.Margin = new System.Windows.Forms.Padding(2);
             this.txtID.Name = "txtID";
+            this.txtID.ReadOnly = true;
             this.txtID.Size = new System.Drawing.Size(113, 21);
             this.txtID.TabIndex = 1;
             // 
@@ -280,114 +277,33 @@ namespace eungsosil
             // 
             // dataGridView1
             // 
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToDeleteRows = false;
+            this.dataGridView1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.Control;
             this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.seq,
-            this.jongmok_cd,
             this.jongmok_nm,
-            this.priority,
-            this.buy_amt,
+            this.amount,
+            this.average_price,
             this.buy_price,
-            this.target_price,
-            this.cut_loss_price,
-            this.buy_trd_yn,
-            this.sell_trd_yn,
-            this.check});
+            this.profit,
+            this.profit_amount,
+            this.profit_loss_rate,
+            this.today_buy,
+            this.today_sell});
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(7, 20);
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(2);
             this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowHeadersWidth = 62;
             this.dataGridView1.RowTemplate.Height = 30;
             this.dataGridView1.Size = new System.Drawing.Size(477, 358);
             this.dataGridView1.TabIndex = 4;
-            // 
-            // seq
-            // 
-            this.seq.Frozen = true;
-            this.seq.HeaderText = "순번";
-            this.seq.MinimumWidth = 8;
-            this.seq.Name = "seq";
-            this.seq.Width = 60;
-            // 
-            // jongmok_cd
-            // 
-            this.jongmok_cd.HeaderText = "종목코드";
-            this.jongmok_cd.MinimumWidth = 6;
-            this.jongmok_cd.Name = "jongmok_cd";
-            this.jongmok_cd.Width = 80;
-            // 
-            // jongmok_nm
-            // 
-            this.jongmok_nm.HeaderText = "종목명";
-            this.jongmok_nm.MinimumWidth = 6;
-            this.jongmok_nm.Name = "jongmok_nm";
-            this.jongmok_nm.Width = 80;
-            // 
-            // priority
-            // 
-            this.priority.HeaderText = "우선순위";
-            this.priority.MinimumWidth = 6;
-            this.priority.Name = "priority";
-            this.priority.Width = 80;
-            // 
-            // buy_amt
-            // 
-            this.buy_amt.HeaderText = "매수금액";
-            this.buy_amt.MinimumWidth = 6;
-            this.buy_amt.Name = "buy_amt";
-            this.buy_amt.Width = 80;
-            // 
-            // buy_price
-            // 
-            this.buy_price.HeaderText = "매수가";
-            this.buy_price.MinimumWidth = 6;
-            this.buy_price.Name = "buy_price";
-            this.buy_price.Width = 70;
-            // 
-            // target_price
-            // 
-            this.target_price.HeaderText = "목표가";
-            this.target_price.MinimumWidth = 6;
-            this.target_price.Name = "target_price";
-            this.target_price.Width = 70;
-            // 
-            // cut_loss_price
-            // 
-            this.cut_loss_price.HeaderText = "손절가";
-            this.cut_loss_price.MinimumWidth = 6;
-            this.cut_loss_price.Name = "cut_loss_price";
-            this.cut_loss_price.Width = 70;
-            // 
-            // buy_trd_yn
-            // 
-            this.buy_trd_yn.HeaderText = "매수여부";
-            this.buy_trd_yn.Items.AddRange(new object[] {
-            "Y",
-            "N"});
-            this.buy_trd_yn.MinimumWidth = 6;
-            this.buy_trd_yn.Name = "buy_trd_yn";
-            this.buy_trd_yn.Width = 80;
-            // 
-            // sell_trd_yn
-            // 
-            this.sell_trd_yn.HeaderText = "매도여부";
-            this.sell_trd_yn.Items.AddRange(new object[] {
-            "Y",
-            "N"});
-            this.sell_trd_yn.MinimumWidth = 6;
-            this.sell_trd_yn.Name = "sell_trd_yn";
-            this.sell_trd_yn.Width = 80;
-            // 
-            // check
-            // 
-            this.check.HeaderText = "체크";
-            this.check.MinimumWidth = 6;
-            this.check.Name = "check";
-            this.check.Width = 60;
             // 
             // statusStrip1
             // 
@@ -411,11 +327,7 @@ namespace eungsosil
             // 
             this.panel1.Controls.Add(this.searchBtn);
             this.panel1.Controls.Add(this.label1);
-            this.panel1.Controls.Add(this.button4);
-            this.panel1.Controls.Add(this.button3);
-            this.panel1.Controls.Add(this.button2);
             this.panel1.Controls.Add(this.stockList);
-            this.panel1.Controls.Add(this.button1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(2, 16);
             this.panel1.Margin = new System.Windows.Forms.Padding(2);
@@ -425,7 +337,7 @@ namespace eungsosil
             // 
             // searchBtn
             // 
-            this.searchBtn.Location = new System.Drawing.Point(527, 20);
+            this.searchBtn.Location = new System.Drawing.Point(534, 37);
             this.searchBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.searchBtn.Name = "searchBtn";
             this.searchBtn.Size = new System.Drawing.Size(79, 24);
@@ -437,65 +349,21 @@ namespace eungsosil
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(128, 26);
+            this.label1.Location = new System.Drawing.Point(135, 43);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(89, 12);
             this.label1.TabIndex = 10;
             this.label1.Text = "종목코드 검색 :";
             // 
-            // button4
-            // 
-            this.button4.Location = new System.Drawing.Point(439, 50);
-            this.button4.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(66, 24);
-            this.button4.TabIndex = 9;
-            this.button4.Text = "삭제";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
-            // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(354, 50);
-            this.button3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(66, 24);
-            this.button3.TabIndex = 8;
-            this.button3.Text = "수정";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(271, 50);
-            this.button2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(66, 24);
-            this.button2.TabIndex = 7;
-            this.button2.Text = "삽입";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
             // stockList
             // 
             this.stockList.FormattingEnabled = true;
-            this.stockList.Location = new System.Drawing.Point(222, 22);
+            this.stockList.Location = new System.Drawing.Point(229, 39);
             this.stockList.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.stockList.Name = "stockList";
             this.stockList.Size = new System.Drawing.Size(285, 20);
             this.stockList.TabIndex = 18;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(191, 50);
-            this.button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(66, 24);
-            this.button1.TabIndex = 6;
-            this.button1.Text = "조회";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // groupBox2
             // 
@@ -1032,6 +900,81 @@ namespace eungsosil
             this.splitter2.TabIndex = 11;
             this.splitter2.TabStop = false;
             // 
+            // seq
+            // 
+            this.seq.Frozen = true;
+            this.seq.HeaderText = "순번";
+            this.seq.MinimumWidth = 8;
+            this.seq.Name = "seq";
+            this.seq.ReadOnly = true;
+            this.seq.Width = 75;
+            // 
+            // jongmok_nm
+            // 
+            this.jongmok_nm.Frozen = true;
+            this.jongmok_nm.HeaderText = "종목명";
+            this.jongmok_nm.MinimumWidth = 6;
+            this.jongmok_nm.Name = "jongmok_nm";
+            this.jongmok_nm.ReadOnly = true;
+            this.jongmok_nm.Width = 90;
+            // 
+            // amount
+            // 
+            this.amount.Frozen = true;
+            this.amount.HeaderText = "보유수량";
+            this.amount.MinimumWidth = 6;
+            this.amount.Name = "amount";
+            this.amount.ReadOnly = true;
+            // 
+            // average_price
+            // 
+            this.average_price.Frozen = true;
+            this.average_price.HeaderText = "평균단가";
+            this.average_price.MinimumWidth = 6;
+            this.average_price.Name = "average_price";
+            this.average_price.ReadOnly = true;
+            // 
+            // buy_price
+            // 
+            this.buy_price.Frozen = true;
+            this.buy_price.HeaderText = "매입금액";
+            this.buy_price.MinimumWidth = 6;
+            this.buy_price.Name = "buy_price";
+            this.buy_price.ReadOnly = true;
+            // 
+            // profit
+            // 
+            this.profit.Frozen = true;
+            this.profit.HeaderText = "평가금액";
+            this.profit.MinimumWidth = 6;
+            this.profit.Name = "profit";
+            this.profit.ReadOnly = true;
+            // 
+            // profit_amount
+            // 
+            this.profit_amount.HeaderText = "손익금액";
+            this.profit_amount.Name = "profit_amount";
+            this.profit_amount.ReadOnly = true;
+            // 
+            // profit_loss_rate
+            // 
+            this.profit_loss_rate.HeaderText = "손익율";
+            this.profit_loss_rate.Name = "profit_loss_rate";
+            this.profit_loss_rate.ReadOnly = true;
+            this.profit_loss_rate.Width = 90;
+            // 
+            // today_buy
+            // 
+            this.today_buy.HeaderText = "금일매수수량";
+            this.today_buy.Name = "today_buy";
+            this.today_buy.ReadOnly = true;
+            // 
+            // today_sell
+            // 
+            this.today_sell.HeaderText = "금일매도수량";
+            this.today_sell.Name = "today_sell";
+            this.today_sell.ReadOnly = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
@@ -1106,10 +1049,6 @@ namespace eungsosil
         private System.Windows.Forms.Label lblCode;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.ToolStripMenuItem 로그아웃ToolStripMenuItem;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
@@ -1145,19 +1084,18 @@ namespace eungsosil
         private System.Windows.Forms.Splitter splitter1;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.Splitter splitter2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn seq;
-        private System.Windows.Forms.DataGridViewTextBoxColumn jongmok_cd;
-        private System.Windows.Forms.DataGridViewTextBoxColumn jongmok_nm;
-        private System.Windows.Forms.DataGridViewTextBoxColumn priority;
-        private System.Windows.Forms.DataGridViewTextBoxColumn buy_amt;
-        private System.Windows.Forms.DataGridViewTextBoxColumn buy_price;
-        private System.Windows.Forms.DataGridViewTextBoxColumn target_price;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cut_loss_price;
-        private System.Windows.Forms.DataGridViewComboBoxColumn buy_trd_yn;
-        private System.Windows.Forms.DataGridViewComboBoxColumn sell_trd_yn;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn check;
         private System.Windows.Forms.ListBox status;
         private System.Windows.Forms.TextBox stock_amount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn seq;
+        private System.Windows.Forms.DataGridViewTextBoxColumn jongmok_nm;
+        private System.Windows.Forms.DataGridViewTextBoxColumn amount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn average_price;
+        private System.Windows.Forms.DataGridViewTextBoxColumn buy_price;
+        private System.Windows.Forms.DataGridViewTextBoxColumn profit;
+        private System.Windows.Forms.DataGridViewTextBoxColumn profit_amount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn profit_loss_rate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn today_buy;
+        private System.Windows.Forms.DataGridViewTextBoxColumn today_sell;
     }
 }
 
